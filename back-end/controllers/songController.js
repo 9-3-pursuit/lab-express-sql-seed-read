@@ -1,7 +1,7 @@
 const express = require("express");
 const songs = express.Router();
 
-// index
+// INDEX
 songs.get("/", (req, res) => {
 
 });
