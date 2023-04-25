@@ -4,7 +4,7 @@ const getAllSongs = async () => {
   try {
     const allSongs = await db.any("SELECT * FROM songs");
     return allSongs;
-  } catch (e) {
+  } catch (error) {
     return error;
   }
 };
