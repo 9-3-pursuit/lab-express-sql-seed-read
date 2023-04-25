@@ -5,6 +5,8 @@ const cors = require("cors");
 
 // CONFIGURATION
 const app = express();
+
+//middleware
 app.use(cors());
 app.use(express.json()); // json middleware parses incoming requests with JSON payloads
 
