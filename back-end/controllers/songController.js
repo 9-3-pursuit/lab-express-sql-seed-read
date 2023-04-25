@@ -1,6 +1,6 @@
 const express = require("express");
 const songs = express.Router();
-const { getAllSongs } = require("../queries/songs.js");
+const { getAllSongs } = require("../queries/queries.js");
 
 // index page
 songs.get("/", async (req, res) => {
@@ -14,4 +14,3 @@ songs.get("/", async (req, res) => {
 });
 
 module.exports = songs;
-
