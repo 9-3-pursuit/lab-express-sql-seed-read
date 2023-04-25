@@ -17,12 +17,11 @@ songs.get("/", async (req, res) => {
 songs.get("/:id", async (req, res) => {
   const { id } = req.params;
   const song = await getSong(id);
-  if (!songs.error) {
+  if (song) {
     res.status(200).json(song);
-  } else if (song.error.code === 0) {
-    res.status(404).json({ error: "song not found" });
-  } else {
-    res.status(500).json({ error: "server error" });
+  } else  {
+    res.status(404).json({ error: "not found" });
+  
   }
 });
 
@@ -38,9 +37,9 @@ songs.post("/", async (req, res) => {
     is_favorite,
   });
   if (!newSong.error) {
-    res.status(201).json(newSong);
+    res.status(200).json(newSong);
   } else {
-    res.status(500).json({ error: "server error" });
+    res.status(400).json({ error: "server error" });
   }
 });
 
