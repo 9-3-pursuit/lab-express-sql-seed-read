@@ -44,13 +44,13 @@ const createSong = async (song) => {
     }
 };
 
- const updateSong = async (id, song) => { // songs/id
+ const updatedSong = async (id, song) => { // songs/id
     try {
-        const updatedSong = await db.one(
-            `UPDATE FROM songs SET name=$1, artist=$2, album=$3, time=$4, is_favorite=$5 WHERE id=$6 RETURNING * `,
+        const updateSong = await db.one(
+            `UPDATE FROM songs SET name=$1, artist=$2, album=$3, time=$4, is_favorite=$5`,
              [song.name, song.artist, song.album, song.time, song.is_favorite, id]
         );
-        return updatedSong;
+        return updateSong;
     } catch(error) {
         return error
     }
@@ -61,6 +61,6 @@ module.exports = {
     getAllSongs, 
     getOneSong,
     createSong,
-    updateSong,
+    updatedSong,
     deleteSong,
     };

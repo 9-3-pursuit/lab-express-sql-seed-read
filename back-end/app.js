@@ -8,11 +8,11 @@ const app = express();
 
 // Middleware
 app.use(cors());
-app.use(express.json());
+app.use(express.json()); // parses incoming json request
 
 // Routes
 app.get("/", (req, res) => {
-    res.send("Welcome to Tuner Songs App")
+    res.send("Welcome to Tuner Full Stack App")
 });
 
 // Song ROUTES

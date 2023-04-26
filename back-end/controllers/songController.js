@@ -12,14 +12,13 @@ const {
 const {validateURL} = require("../validations/validations.js")
 
 
-// Index
+// Index (all songs)
 songs.get("/", async (req, res) => {
+    //http://localhost:3445/songs
     const allSongs = await getAllSongs();
-    //console.log(allSongs);
-    if (allSongs[0]) {
+    if (!allSongs.error) {
         res.status(200).json(allSongs);
     } else {
-        console.log(allSongs)
         res.status(500).json({ error: "server error" });
     }
 });
@@ -28,10 +27,11 @@ songs.get("/", async (req, res) => {
 songs.get('/:id', async (req, res) => {
     const { id } = req.params;
     const song = await getOneSong(id);
+    console.log(song);
     if (!song.error) {
         res.status(200).json(song);
     } else if (song.error.code === 0) {
-        res.status(404).json({ error: "Song not found"})
+        res.status(404).json({ error: "song not found"})
     } else {
         res.status(500).json({error: "server error"})
     }
@@ -62,30 +62,37 @@ songs.post(
         is_favorite,
       });
     if (!newSong.error) {
-        res.status(201).json(newSong)
+        res.status(201).json(newSong);
     } else {
-        res.status(500).json({error: "server error"})
+        res.status(500).json({error: "server error"});
     }
-})
+});
 
 // Update
-songs.put('/:id', async (req, res) => {
-    const song = req.body;
+songs.put('/:id', validateURL, async (req, res) => {
     const { id } = req.params;
-    const updatedSong = await updateSong(id, song)
-    res.status(200).json(updatedSong)
-})
+    const song = req.body;
+    const updatedSong = await updateSong(id, song);
+    console.log(updatedSong);
+    if (updatedSong.id) {
+        res.status(200).json(updatedSong);
+    } else {
+        res.status(404).json("Song not found");
+    }
+});
+    
 
 // Delete
 songs.delete('/:id', async (req, res) => {
     const { id } = req.params;
-    const deletedSong = await deleteSong(id)
+    const deletedSong = await deleteSong(id);
+    console.log(deletedSong);
     if (deletedSong.id){
         res.status(201).json(deletedSong)
-    }else {
+    } else {
         res.status(404).json("Song not found")
     }
-})
+});
 
 
 module.exports = songs;
