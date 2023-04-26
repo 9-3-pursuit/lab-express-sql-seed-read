@@ -1,5 +1,6 @@
 const db = require("../db/dbConfig")
 
+// all
 const getAllSongs = async () => {
     try {
         const allSongs = await db.any("SELECT * FROM songs");
@@ -9,5 +10,15 @@ const getAllSongs = async () => {
     }
 };
 
+// one
+const getSong = async (id) => {
+    try {
+        const song = await db.one("SELECT * FROM songs WHERE id=$1", id);
+        return song;
+    } catch (error) {
+        return { error: error };
+    }
+}
 
-module.exports = { getAllSongs };
+
+module.exports = { getAllSongs, getSong };
