@@ -17,14 +17,10 @@ app.get("/", (req, res) => {
     res.send("Welcome to Tuner")
 });
 
-
-
 // 404 page
 app.get("*", (req, res) => {
     res.status(404).send("Page not found");
 });
-
-
 
 // export
 module.exports = app;
