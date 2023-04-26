@@ -6,5 +6,7 @@ const cn = {
     database: process.env.PG_DATABASE,
     user: process.env.PG_USER,
 };
+
 const db = pgp(cn);
+
 module.exports = db;

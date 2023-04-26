@@ -1,10 +1,10 @@
 // Dependencies 
 const express = require("express");
 const cors = require("cors");
+const songsController = require('./controllers/songController.js')
 
 // Configuration 
 const app = express();
-const songsController = require("./controllers/songController.js");
 
 // Middleware
 app.use(cors());
@@ -12,7 +12,7 @@ app.use(express.json());
 
 // Routes
 app.get("/", (req, res) => {
-    res.send("Welcome to Songs App")
+    res.send("Welcome to Tuner Songs App")
 });
 
 // Song ROUTES
