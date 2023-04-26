@@ -1,7 +1,7 @@
 const express = require("express")
 const songs = express.Router();
 const { getAllSongs , getSong , createSong } = require("../queries/songs.js");
-const { checkName } = require("../validations/checkSongs.js")
+const { checkName , checkBoolean } = require("../validations/checkSongs.js")
 
 //INDEX
 songs.get("/" , async (req, res) => {
@@ -27,7 +27,7 @@ songs.get("/:id", async (req, res) => {
 }) 
 
 //CREATE
-songs.post("/", checkName, async (req, res) => {
+songs.post("/", checkName, checkBoolean, async (req, res) => {
     try {
         const song = await createSong(req.body);
         res.json(song);
