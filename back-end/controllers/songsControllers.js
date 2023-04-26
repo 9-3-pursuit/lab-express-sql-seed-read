@@ -6,14 +6,18 @@ const {
   getSong,
   createSong,
   deleteSong,
-  updateSong
+  updateSong,
 } = require("../queries/songs.js");
 
-const { validateURL } = require("../validations/validations.js");
+const {
+  validateURL,
+  checkFaveBoolean,
+  checkNameThere,
+} = require("../validations/validations.js");
 
 // Part 1 --v
 
-// GET ALL SONGS 
+// GET ALL SONGS
 songs.get("/", async (req, res) => {
   const allSongs = await getAllSongs();
   if (allSongs[0]) {
@@ -23,10 +27,9 @@ songs.get("/", async (req, res) => {
   }
 });
 
-
 // Part 2 --v
 
-// SHOW one song 
+// SHOW one song
 songs.get("/:id", async (req, res) => {
   const { id } = req.params;
   const song = await getSong(id);
@@ -59,18 +62,22 @@ songs.post("/", async (req, res) => {
 
 // UPDATE PUT song
 // songs.put("/:id", checkName, checkBoolean, async (req, res) => {
-  songs.put("/:id", validateURL,  async (req, res) => {
+songs.put(
+  "/:id",
+  validateURL,
+  checkFaveBoolean,
+  checkNameThere,
+  async (req, res) => {
     const { id } = req.params;
     const song = req.body;
     const updatedSong = await updateSong(id, song);
     res.status(200).json(updatedSong);
-  });
-
+  }
+);
 
 // DELETE song
 songs.delete(":/id", async (req, res) => {
   const { id } = req.params;
-  // ! this var name CAN'T be the same as queries function name OR it will not be able to import on to controllers
   const goneSong = await deleteSong(id);
   if (goneSong.id) {
     res.status(200).json(goneSong);
