@@ -1,6 +1,6 @@
 const express = require("express");
 const songs = express.Router();
-const { getAllSongs, getSong } = require("../queries/songs");
+const { getAllSongs, getSong, createSong } = require("../queries/songs");
 
 // index
 songs.get("/", async (req, res) => {
@@ -21,6 +21,19 @@ songs.get("/:id", async (req, res) => {
         res.status(200).json(song);
     } else if (song.error.code === 0) {
         res.status(404).json({ error: "Song Not Found" });
+    } else {
+        res.status(500).json({ error: "Server Error" });
+    }
+})
+
+// create
+// POST /songs
+songs.post("/", async (req, res) => {
+    const { name, artist, album, time, is_favorite } = req.body;
+
+    const newSong = await createSong({ name, artist, album, time, is_favorite });
+    if (!newSong.error) {
+        res.status(201).json(newSong);
     } else {
         res.status(500).json({ error: "Server Error" });
     }
