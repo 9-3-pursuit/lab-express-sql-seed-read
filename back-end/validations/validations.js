@@ -10,7 +10,7 @@ checkFaveBoolean = (req, res, next) => {
   ) {
     next();
   } else {
-    res.status(400).json({ error: "is_favorite must be Boolean" });
+    res.status(400).json({ error: "is_favorite must be boolean" });
   }
 };
 
@@ -19,7 +19,7 @@ checkSongNameThere = (req, res, next) => {
   if (req.body.name) {
     next();
   } else {
-    res.status(400).json({ error: "name must ne present" });
+    res.status(400).json({ error: "song name must ne present" });
   }
 };
 
