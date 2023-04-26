@@ -1,5 +1,6 @@
 const db = require("../db/dbConfig.js");
 
+// Part 1 --v
 // all songs
 const getAllSongs = async () => {
   try {
@@ -11,6 +12,7 @@ const getAllSongs = async () => {
   }
 };
 
+// Part 2 --v 
 // one song
 const getSong = async (id) => {
   try {
@@ -35,8 +37,37 @@ const createSong = async (song) => {
   }
 };
 
+// Part 3 --v
+// delete a bookmark
+const deleteSong = async (id) => {
+  try {
+    const deletedSong = await db.one(
+      "DELETE FROM songs WHERE id=$1 RETURNING *",
+      id
+    );
+    return deletedSong;
+  } catch (error) {
+    return error;
+  }
+};
+
+// update song
+const updateSong = async (id, song) => {
+  try {
+    const updateSong = await db.one(
+      `UPDATE songss SET name=$1, artist=$2, album=$3, time=$4, is_favorite=$5 WHERE  id=$6 RETURNING *`,
+      [song.name, song.artist, song.ablum, song.time, song.is_favorite, id]
+    );
+    return updateSong;
+  } catch (error) {
+    return error;
+  }
+};
+
 module.exports = {
   getAllSongs,
   getSong,
-  createSong
+  createSong,
+  deleteSong,
+  updateSong,
 };
