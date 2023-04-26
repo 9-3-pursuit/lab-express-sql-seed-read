@@ -18,4 +18,4 @@ const getOneSong = async (id) => {
   }
 };
 
-module.exports = { getAllSongs };
+module.exports = { getAllSongs, getOneSong };
