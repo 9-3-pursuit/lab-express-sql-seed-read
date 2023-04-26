@@ -10,9 +10,9 @@ const {
 } = require("../queries/songs.js");
 
 const {
-  validateURL,
   checkFaveBoolean,
-  checkNameThere,
+  checkSongNameThere,
+  checkArtistNameThere,
 } = require("../validations/validations.js");
 
 // Part 1 --v
@@ -64,9 +64,9 @@ songs.post("/", async (req, res) => {
 // songs.put("/:id", checkName, checkBoolean, async (req, res) => {
 songs.put(
   "/:id",
-  validateURL,
+  checkArtistNameThere,
   checkFaveBoolean,
-  checkNameThere,
+  checkSongNameThere,
   async (req, res) => {
     const { id } = req.params;
     const song = req.body;

@@ -1,17 +1,3 @@
-// checks if URL input is correct
-const validateURL = (req, res, next) => {
-  if (
-    req.body.url.substring(0, 7) === "http://" ||
-    req.body.url.substring(0, 8) === "https://"
-  ) {
-    return next();
-  } else {
-    res
-      .status(400)
-      .json({ error: `You forgot to start your url with http:// or https://` });
-  }
-};
-
 // checls if favorite value is a boolean => true or false; is it a favorite or not?
 checkFaveBoolean = (req, res, next) => {
   const { is_favorite } = req.body;
@@ -28,8 +14,8 @@ checkFaveBoolean = (req, res, next) => {
   }
 };
 
-// checks to make sure name input is present
-checkNameThere = (req, res, next) => {
+// checks to make sure song name input is present
+checkSongNameThere = (req, res, next) => {
   if (req.body.name) {
     next();
   } else {
@@ -37,8 +23,17 @@ checkNameThere = (req, res, next) => {
   }
 };
 
+// checks to make sure artist name input is present
+checkArtistNameThere = (req, res, next) => {
+  if (req.body.artist) {
+    next();
+  } else {
+    res.status(400).json({ error: "artist name must ne present" });
+  }
+};
+
 module.exports = {
-  validateURL,
+  checkArtistNameThere,
   checkFaveBoolean,
-  checkNameThere,
+  checkSongNameThere,
 };
