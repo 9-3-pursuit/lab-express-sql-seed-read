@@ -1,6 +1,15 @@
+// Dependencies
 const express = require("express");
 const songs = express.Router();
-const { getAllSongs, getOneSong, createSong, deleteSong, updateSong } = require("../queries/songs.js");
+const {
+    getAllSongs,
+    getOneSong,
+    createSong,
+    deleteSong,
+    updateSong 
+} = require("../queries/songs.js");
+
+const {validateURL} = require("../validations/validations.js")
 
 
 // Index
@@ -29,9 +38,29 @@ songs.get('/:id', async (req, res) => {
 });
 
 // Create
-songs.post('/', async (req, res) => {
+songs.post(
+    '/', validateURL,
+    async (req, res, next) => {
+     // validate req.body
     const { name, artist, album, time, is_favorite } = req.body;
-    const newSong = await createSong({name, artist, album, time, is_favorite});
+    if (!name || !artist || !album || !time || !is_favorite) {
+        return res
+          .status(422)
+          .json({ error: "body requires name, artist, album, time, and is_favorite" });
+      }
+  
+      next();
+    },
+    async (req, res) => {
+      const { name, artist, album, time, is_favorite } = req.body;
+      
+    const newSong = await createSong({
+        name,
+        artist,
+        album,
+        time,
+        is_favorite,
+      });
     if (!newSong.error) {
         res.status(201).json(newSong)
     } else {
