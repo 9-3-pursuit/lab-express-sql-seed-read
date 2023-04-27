@@ -25,15 +25,15 @@ songs.get("/:id", async (req, res) => {
   if (song) {
     res.json(song);
   } else {
-    res.status(404).json({ error: "not found" });
+    res.status(404).json({ error: error});
   }
 });
 
 // CREATE
 songs.post("/", async (req, res) => {
   try {
-    const { name, artist, album, time, is_favorite } = req.body;
-    const newSong = await createSong(name, artist, album, time, is_favorite);
+    const song = req.body;
+    const newSong = await createSong(song);
     res.status(201).json(newSong);
   } catch (error) {
     res.status(400).json({ error: error });

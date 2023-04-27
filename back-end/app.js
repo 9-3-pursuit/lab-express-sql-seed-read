@@ -12,7 +12,7 @@ app.use(express.json()); // json middleware parses incoming requests with JSON p
 
 // ROUTES
 app.get("/", (req, res) => {
-  res.send("Welcome to the Tuner Full  Application");
+  res.send("Welcome to Tuner");
 });
 
 app.use("/songs", songController);
