@@ -1,6 +1,7 @@
 // DEPENDENCIES
 const cors = require("cors");
 const express = require("express");
+const songController = require("./controllers/songController");
 
 // CONFIGURATION
 const app = express();
@@ -14,7 +15,7 @@ app.get("/", (req, res) => {
     res.send("Welcome to Tuner");
 });
 
-
+app.use("/songs", songController);
 
 app.get("*", (req, res) => {
     res.status(404).send("Page Not Found");
