@@ -14,11 +14,14 @@ app.use(express.json());//parses incoming json request
 
 // ROUTES
 app.get("/", (req, res)=> {
-    res.send("Welcome to Tuner app")
+    res.send("Welcome to Tuner")
 });
-app.use("songs", songControllers);
-app.use("*", (req, res) => {
+app.use("/songs", songControllers);
+app.get("*", (req, res) => {
     res.status(404).send("Page not found")
-})
+});
+
+
+
 
 module.exports = app;
