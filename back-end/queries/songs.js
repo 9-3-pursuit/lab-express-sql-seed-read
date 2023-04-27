@@ -12,7 +12,7 @@ const getAllSongs = async () => {
   }
 };
 
-// Part 2 --v 
+// Part 2 --v
 // one song
 const getSong = async (id) => {
   try {
@@ -55,7 +55,7 @@ const deleteSong = async (id) => {
 const updateSong = async (id, song) => {
   try {
     const updateSong = await db.one(
-      `UPDATE songss SET name=$1, artist=$2, album=$3, time=$4, is_favorite=$5 WHERE  id=$6 RETURNING *`,
+      `UPDATE songs SET name=$1, artist=$2, album=$3, time=$4, is_favorite=$5 WHERE  id=$6 RETURNING *`,
       [song.name, song.artist, song.ablum, song.time, song.is_favorite, id]
     );
     return updateSong;
