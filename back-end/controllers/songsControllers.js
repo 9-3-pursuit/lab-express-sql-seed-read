@@ -61,16 +61,20 @@ songs.post("/", async (req, res) => {
 // part 3 --v
 
 // UPDATE PUT song
-// songs.put("/:id", checkName, checkBoolean, async (req, res) => {
 songs.put(
   "/:id",
-  checkArtistNameThere,
   checkFaveBoolean,
+  checkArtistNameThere,
   checkSongNameThere,
   async (req, res) => {
     const { id } = req.params;
     const song = req.body;
     const updatedSong = await updateSong(id, song);
+    if (updatedSong) {
+      res.status(200).json(updatedSong);
+    } else {
+      res.status(404).json({ error: "not found" });
+    }
     res.status(200).json(updatedSong);
   }
 );

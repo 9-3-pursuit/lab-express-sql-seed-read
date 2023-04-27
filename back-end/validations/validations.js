@@ -1,16 +1,12 @@
 // checls if favorite value is a boolean => true or false; is it a favorite or not?
 checkFaveBoolean = (req, res, next) => {
   const { is_favorite } = req.body;
-  if (
-    is_favorite == "true" ||
-    is_favorite == "false" ||
-    is_favorite == true ||
-    is_favorite == false ||
-    is_favorite == undefined
-  ) {
+  if (is_favorite === true || 
+    is_favorite === false || 
+    is_favorite === undefined) {
     next();
   } else {
-    res.status(400).json({ error: "is_favorite must be boolean" });
+    res.status(400).json({ error: "is_favorite must be a boolean value" });
   }
 };
 
@@ -19,7 +15,7 @@ checkSongNameThere = (req, res, next) => {
   if (req.body.name) {
     next();
   } else {
-    res.status(400).json({ error: "song name must ne present" });
+    res.status(400).json({ error: "song name must be present" });
   }
 };
 
