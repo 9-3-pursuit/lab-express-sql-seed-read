@@ -70,11 +70,6 @@ songs.put(
     const { id } = req.params;
     const song = req.body;
     const updatedSong = await updateSong(id, song);
-    if (updatedSong) {
-      res.status(200).json(updatedSong);
-    } else {
-      res.status(404).json({ error: "not found" });
-    }
     res.status(200).json(updatedSong);
   }
 );
