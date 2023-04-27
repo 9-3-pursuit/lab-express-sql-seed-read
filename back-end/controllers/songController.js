@@ -1,7 +1,7 @@
 const express = require("express")
 const songs = express.Router();
-const { getAllSongs , getSong , createSong } = require("../queries/songs.js");
-const { checkName , checkBoolean } = require("../validations/checkSongs.js")
+const { getAllSongs , getSong , createSong, deleteSong, updateSong } = require("../queries/songs.js");
+const songValidator = require("../validations/checkSongs.js");
 
 //INDEX
 songs.get("/" , async (req, res) => {
@@ -27,13 +27,31 @@ songs.get("/:id", async (req, res) => {
 }) 
 
 //CREATE
-songs.post("/", checkName, checkBoolean, async (req, res) => {
-    try {
-        const song = await createSong(req.body);
-        res.json(song);
-    }catch (error) {
-        res.status(400).json({ error: error });
+songs.post("/", async (req, res) => {
+    const newSong = await createSong(req.body);
+    if (!newSong.error) {
+        res.status(201).json(newSong)
+    } else {
+       res.status(500).json({ error: "server error" }) 
     }
+})
+
+//DELETE
+songs.delete("/:id" , async (req, res) => {
+    const { id } = req.params;
+    const deletedSong = await deleteSong(id);
+    if(deletedSong.id) {
+        res.status(200).json(deletedSong)
+    } else {
+        res.status(404).send("Bookmark not found")
+    }
+})
+
+//UPDATE
+songs.put("/:id", async (req, res) => {
+    const { id } = req.params;
+    const updatedSong = await updateSong(id, req.body);
+    res.status(200).json(updatedSong)
 });
 
 module.exports = songs;
