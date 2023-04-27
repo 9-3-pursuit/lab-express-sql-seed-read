@@ -1,6 +1,18 @@
 const express = require("express");
 const songs = express.Router();
-const { getAllSongs, getSong, createSong, updateSong, deleteSong } = require("../queries/songs");
+const {
+    getAllSongs,
+    getSong,
+    createSong,
+    updateSong,
+    deleteSong
+} = require("../queries/songs");
+
+const {
+    checkName,
+    checkArtist,
+    checkBoolean
+} = require("../queries/validations")
 
 // index
 songs.get("/", async (req, res) => {
@@ -28,10 +40,23 @@ songs.get("/:id", async (req, res) => {
 
 // create
 // POST /songs
-songs.post("/", async (req, res) => {
+songs.post("/", checkName, checkArtist, checkBoolean, (req, res) => {
     const { name, artist, album, time, is_favorite } = req.body;
-
-    const newSong = await createSong({ name, artist, album, time, is_favorite });
+    if (!name || !artist || !album || !time || !is_favorite) {
+        return res
+            .status(422)
+            .json({ error: "Body requires name, artist, album, time, and is_favorite" });
+    }
+    next();
+}, async (req, res) => {
+    const { name, artist, album, time, is_favorite } = req.body;
+    const newSong = await createSong({
+        name,
+        artist,
+        album,
+        time,
+        is_favorite
+    });
     if (!newSong.error) {
         res.status(201).json(newSong);
     } else {
@@ -41,12 +66,12 @@ songs.post("/", async (req, res) => {
 
 // update
 // PUT
-songs.put("/:id", async (req, res) => {
+songs.put("/:id", checkName, checkArtist, checkBoolean, async (req, res) => {
     const { id } = req.params;
     const song = req.body;
     const updatedSong = await updateSong(id, song);
     res.status(201).json(updatedSong);
-})
+});
 
 // delete
 // DELETE songs/:id
