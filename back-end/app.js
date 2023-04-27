@@ -12,7 +12,7 @@ app.use(express.json());
 
 //routes
 app.get("/", (req, res) => {
-    res.send("Welcome to Songs App")
+    res.send("Welcome to Tuner")
 });
 
 // Song ROUTES
