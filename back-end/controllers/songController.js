@@ -6,6 +6,11 @@ const express = require("express");
     updateSong,
     deleteSong 
     } = require("../queries/songs.js");
+const { 
+    checkName,
+    checkArtist,
+    checkBoolean
+    } = require("../validations/checkSongs");
 
  // INDEX
  songs.get("/", async (req, res) => {
@@ -27,7 +32,7 @@ const express = require("express");
     }
   });
   // CREATE
-songs.post("/", async (req, res) => {
+songs.post("/", checkName, checkArtist, checkBoolean, async (req, res) => {
     try {
       const song = await createSong(req.body);
       res.json(song);
@@ -36,7 +41,7 @@ songs.post("/", async (req, res) => {
     }
   });
    //update
-   songs.put("/:id", async (req, res) => {
+   songs.put("/:id",checkName, checkArtist, checkBoolean, async (req, res) => {
     const { id } = req.params;
     const updatedSong = await updateSong(id, req.body);
     if (updatedSong.id) {
