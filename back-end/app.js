@@ -10,15 +10,17 @@ const app = express();
 app.use(cors());
 app.use(express.json()); // parses incoming json request
 
-// Routes
+// ROUTES
+
+//  Basic Root Route
 app.get("/", (req, res) => {
     res.send("Welcome to Tuner")
 });
 
-// Song ROUTES
+// Song Routes
 app.use("/songs", songsController);
 
-// 404 PAGE
+// 404 Page (Error Route)
 app.get("*", (req, res) => {
     res.status(404).send("Sorry, nothing found!");
 });
