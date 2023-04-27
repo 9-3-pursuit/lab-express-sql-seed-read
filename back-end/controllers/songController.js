@@ -5,6 +5,7 @@ const {
   getOneSong,
   createSong,
   deleteSong,
+  updateSong,
 } = require("../queries/queries.js");
 
 // index page - all songs
@@ -23,23 +24,34 @@ songs.get("/:id", async (req, res) => {
   const { id } = req.params;
   const song = await getOneSong(id);
   if (song) {
-    res.json(song);
+    res.status(200).json(song);
   } else {
-    res.status(404).json({ error: error});
+    res.status(404).json({ error: "not found" });
   }
 });
 
 // CREATE
 songs.post("/", async (req, res) => {
   try {
-    const song = req.body;
-    const newSong = await createSong(song);
-    res.status(201).json(newSong);
+    const song = await createSong(req.body);
+    res.status(200).json(song);
   } catch (error) {
     res.status(400).json({ error: error });
   }
 });
 
+//update
+songs.put("/:id", async (req, res) => {
+  const { id } = req.params;
+  const updatedSong = await updateSong(id, req.body);
+  if (updatedSong.id) {
+    res.status(200).json(updatedSong);
+  } else {
+    res.status(404).json("song not found");
+  }
+});
+
+// Delete
 songs.delete("/:id", async (req, res) => {
   const { id } = req.params;
   const deletedSong = await deleteSong(id);
