@@ -1,6 +1,13 @@
 const express = require("express");
 const songs = express.Router();
-const { getAllSongs, getSong, createSong, deleteSong, uodateSong } = require("../queries/songs");
+const { 
+    getAllSongs, 
+    getSong, 
+    createSong, 
+    deleteSong, 
+    updateSong 
+} = require("../queries/songs");
+const validateURL = require("../validations/validation");
 
 // INDEX
 songs.get("/", async (req, res) => {
@@ -51,7 +58,7 @@ songs.delete("/", async (req, res) => {
 });
 
 // UPDATE
-songs.put("/:id", async (req, res) => {
+songs.put("/:id", validateURL, async (req, res) => {
     const { id } = req.params;
     const updatedSong = await updateSong(id, req.body);
     res.status(200).json(updatedSong);
