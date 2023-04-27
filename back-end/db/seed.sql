@@ -1,6 +1,6 @@
 \c songs_dev
 
 INSERT INTO songs (name, artist, album, time, is_favorite)
-VALUES ('Bohemian Rhapsody', 'Queen', 'A Night at the Opera', '5:55', true),
-       ('Stairway to Heaven', 'Led Zeppelin', 'Led Zeppelin IV', '8:02', false),
-       ('Hotel California', 'Eagles', 'Hotel California', '6:30', true);
+VALUES ('Kill Bill', 'SZA', 'SOS', '2:35', false),
+       ('Princess Diana', 'Ice Spice', 'Like..?', '2:35', true),
+       ('Calm Down', 'Rema', 'Rave & Roses', '3:59', true);

@@ -12,7 +12,7 @@ app.use(express.json()); // parses incoming json request
 
 // Routes
 app.get("/", (req, res) => {
-    res.send("Welcome to Tuner Full Stack App")
+    res.send("Welcome to Tuner")
 });
 
 // Song ROUTES
@@ -20,7 +20,7 @@ app.use("/songs", songsController);
 
 // 404 PAGE
 app.get("*", (req, res) => {
-    res.status(404).send("Page not found");
+    res.status(404).send("Sorry, nothing found!");
 });
 
 module.exports = app;

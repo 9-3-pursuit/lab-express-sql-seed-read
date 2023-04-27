@@ -1,5 +1,6 @@
 const db = require("../db/dbConfig");
 
+// Part 1: GET (all songs)
 const getAllSongs = async () => {
     try {
         const allSongs = await db.any("SELECT * FROM songs");
@@ -9,6 +10,7 @@ const getAllSongs = async () => {
     }
 };
 
+// Part 2: GET (one song)
 const getOneSong = async (id) => {
     try {
         const oneSong = await db.one("SELECT * FROM songs WHERE id=$1", id);
@@ -18,23 +20,25 @@ const getOneSong = async (id) => {
     }
 }
 
+//  CREATE (new song)
 const createSong = async (song) => {
     try {
-     const newSong = await db.one(
+        const newSong = await db.one(
             `INSERT INTO 
                 songs(name, artist, album, time, is_favorite)
-                VALUES
+            VALUES
                  ($1, $2, $3, $4, $5)
-                RETURNING * `,
+            RETURNING * `,
             [song.name, song.artist, song.album, song.time, song.is_favorite]
-            );
-          return newSong;
-        } catch (error) {
+        );
+        return newSong;
+    } catch (error) {
      return { error: error };
     }
  };
 
- const deleteSong = async (id) => {  // songs/id
+ // Part 3: DELETE (song)
+const deleteSong = async (id) => {  // songs/id
     try {
         const deletedSong = await db.one
         (`DELETE FROM songs WHERE id=$1 RETURNING *`, id);
@@ -44,15 +48,17 @@ const createSong = async (song) => {
     }
 };
 
+
+// UPDATE (song)
  const updatedSong = async (id, song) => { // songs/id
     try {
         const updateSong = await db.one(
-            `UPDATE FROM songs SET name=$1, artist=$2, album=$3, time=$4, is_favorite=$5`,
+            `UPDATE FROM songs SET name=$1, artist=$2, album=$3, time=$4, is_favorite=$5 WHERE id=$6 RETURNING *`,
              [song.name, song.artist, song.album, song.time, song.is_favorite, id]
         );
         return updateSong;
     } catch(error) {
-        return error
+        return error;
     }
 };
 
