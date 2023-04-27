@@ -5,7 +5,7 @@
  --time TEXT,
  --is_favorite BOOLEAN
 
-\c songs_dev
+\c songs_dev;
 
  INSERT INTO songs (name, artist, album, time, is_favorite) VALUES
  ('99 Problems', 'Jay Z', 'The Black Album', '3:54', TRUE),
@@ -18,3 +18,6 @@
  ('Doo Wop (That Thing)', 'Lauryn Hill', 'The Miseducation of Lauryn Hill', '5:20', TRUE),
  ('Paper Planes', 'M.I.A.', 'Kala', '3:24', FALSE),
  ('Billie Jean', 'Michael Jackson', 'Thriller', '4:54', True);
+
+ SELECT * FROM songs;
+ 

@@ -8,6 +8,7 @@ const { getAllSongs} = require("../queries/songs.js");
 songs.get("/", async (req, res) => {
     const allSongs = await getAllSongs()
     if (!allSongs.error) {
+        console.log(allSongs)
         res.status(200).json(allSongs)
     } else {
         res.status(500).json({ error: "server error" });
