@@ -48,9 +48,9 @@ Add a `seed.sql` file that will insert a few songs into your database
 
 Don't forget to update your environmental variables to that you can connect to your Postgres database.
 
-- create a route `/` that says something like `Welcome to Tuner`
-- create a route `/songs` that shows the array of songs you've created
-- create a 404 route that when a user tries to access a route that doesn't exist, they will see this page
+- create a route `/` that says something like `Welcome to Tuner` [✓]
+- create a route `/songs` that shows the array of songs you've created [✓] → (shows when SELECT * FROM songs in terminal connected to songs_dev)
+- create a 404 route that when a user tries to access a route that doesn't exist, they will see this page [✓]
 
 
 ### Bonus
