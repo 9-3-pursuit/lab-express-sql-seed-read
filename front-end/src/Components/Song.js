@@ -1,48 +1,23 @@
 import { Link } from "react-router-dom";
 
-function Song({ song}) {
-    return (
-        <tr>
+function Song({ song, index }) {
+  return (
+    <tr>
+      <td>{song.id}</td>
       <td>
-        {song.is_favorite ? (
-          <span>⭐️</span>
-        ) : (
-          <span>&nbsp; &nbsp; &nbsp;</span>
-        )}
+        <Link to={`/songs/${index}`}>{song.title}</Link>
       </td>
       <td>
-        <a href={song.title} target="_blank" rel="noreferrer">
-       
-          {song.is.is_favorite}
-          {song.artist}
-          {song.time}
-
-        </a>
+        <Link to={`/songs/${index}`}>{song.is_favorite}</Link>
       </td>
       <td>
-        <Link to={`/songs/${song.id}`}>✏️</Link>
+        <Link to={`/songs/${index}`}>{song.artist}</Link>
+      </td>
+      <td>
+        <Link to={`/songs/${index}`}>{song.time}</Link>
       </td>
     </tr>
-        // <tr>
-        //   <td>
-        //   {song.id}
-        //   </td>
-        //   <td>
-        //    <Link to={`/songs/${index}`}>{song.title}</Link>
-        //   </td>
-        //   <td>
-        //     <Link to={`/songs/${index}`}>{song.is_favorite}</Link>
-        //   </td>
-        //   <td>
-        //     <Link to={`/songs/${index}`}>{song.artist}</Link>
-        //   </td>
-        //   <td>
-        //     <Link to={`/songs/${index}`}>{song.time}</Link>
-        //   </td>
-        // </tr>
-      );
-    }
-
-
+  );
+}
 
 export default Song;

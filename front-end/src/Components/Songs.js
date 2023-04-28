@@ -22,12 +22,12 @@ function Bookmarks() {
     <div className="Songs">
       <section>
         <table>
-          <thead>
+          {/* <thead>
             <tr>
              
             
             </tr>
-          </thead>
+          </thead> */}
           <tbody>
             {songs.map((song) => {
               return <Song key={song.id} song={song} />;
