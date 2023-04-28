@@ -2,16 +2,15 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useParams, Link, useNavigate } from "react-router-dom";
 import FourOFour from "../Pages/FourOFour";
-// const API = process.env.REACT_APP_APT_URL;
 
 function SongDetails() {
   const [song, setSong] = useState([]);
-  let { index } = useParams();
+  let { id } = useParams();
   let navigate = useNavigate();
 
   useEffect(() => {
     axios
-      .get(`http://localhost:3333/songs/${index}`)
+      .get(`http://localhost:3333/songs/${id}`)
       .then((response) => {
         console.log(response.data);
         setSong(response.data);
@@ -19,19 +18,17 @@ function SongDetails() {
       .catch(() => {
         navigate(FourOFour);
       });
-  }, [index, navigate]);
+  }, [id, navigate]);
 
-  const handleDelete = () => {
-    axios
-      .delete(`http://localhost:3333/songs/${index}`)
-      .then(() => {
-        navigate("/songs");
-      });
-  };
+//   const handleDelete = () => {
+//     axios.delete(`http://localhost:3333/songs/${id}`).then(() => {
+//       navigate("/songs");
+//     });
+//   };
 
   return (
     <article>
-      <h1>Song Details ⤵ </h1>
+      <h1>Song Details ⤵</h1>
       <h3>
         Name → {song.name}
         <br></br>
@@ -43,19 +40,18 @@ function SongDetails() {
         <br></br>
       </h3>
       <div className="showNavigation">
-        <div>
-          {" "}
-          <Link to={`http://localhost:3333/songs/`}>
+        <div className="back-button">
+          <Link to={`/songs`}>
             <button>Back</button>
           </Link>
         </div>
-        <div>
-          <Link to={`http://localhost:3333/songs/new`}>
+        <div className="edit-button">
+          <Link to={`/songs/${id}/edit`}>
             <button>Edit</button>
           </Link>
         </div>
-        <div>
-          <button onClick={handleDelete} >Delete</button>
+        <div className="delete-button">
+          <button >Delete</button>
         </div>
       </div>
     </article>

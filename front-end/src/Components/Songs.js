@@ -1,33 +1,37 @@
 import axios from "axios";
-// import { useParams } from "react-router-dom";
-import { useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
+import React, { useState, useEffect } from "react";
 import Song from "./Song";
 
 // const API = process.env.REACT_APP_API_URL;
 
-function Bookmarks() {
+function Songs() {
   const [songs, setSongs] = useState([]);
-  // const { id } = useParams;
+  let { id } = useParams();
+  //   let navigate = useNavigate();
   useEffect(() => {
     axios
-      .get(`http://localhost:3333/songs/`)
+      .get(`http://localhost:3333/songs`)
       .then((response) => {
         setSongs(response.data);
       })
       .catch((error) => {
         console.warn("catch", error);
       });
-  }, []);
+  }, [id]);
   return (
     <div className="Songs">
+      <h2>All Songs:</h2>
       <section>
         <table>
-          {/* <thead>
+          <thead>
             <tr>
-             
-            
+              {/* <th>Title: </th> */}
+              {/* <th>Favorite ⭐️</th> */}
+              {/* <th>Artist: </th> */}
+              {/* <th>Time: </th> */}
             </tr>
-          </thead> */}
+          </thead>
           <tbody>
             {songs.map((song) => {
               return <Song key={song.id} song={song} />;
@@ -39,4 +43,4 @@ function Bookmarks() {
   );
 }
 
-export default Bookmarks;
+export default Songs;
