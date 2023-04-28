@@ -49,10 +49,31 @@ const updateSong = async (id, song) => {
     }
 }
 
+const getSongsAscOrder = async () => {
+    try {
+        const songsAscOrder = await db.any("SELECT * FROM songs ORDER BY name ASC");
+        return songsAscOrder;
+    }catch (e) {
+        return error;
+    }
+};
+
+const getSongsDescOrder = async () => {
+    try {
+        const songsDescOrder = await db.any("SELECT * FROM songs ORDER BY name DESC");
+        return songsDescOrder;
+    }catch (e) {
+        return error;
+    }
+};
+
+
 module.exports = {
     getAllSongs,
     getSong,
     createSong,
     deleteSong,
     updateSong,
+    getSongsAscOrder,
+    getSongsDescOrder,
 } 

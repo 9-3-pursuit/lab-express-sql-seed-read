@@ -1,6 +1,6 @@
 const express = require("express")
 const songs = express.Router();
-const { getAllSongs , getSong , createSong, deleteSong, updateSong } = require("../queries/songs.js");
+const { getAllSongs , getSong , createSong, deleteSong, updateSong, getSongsAscOrder, getSongsDescOrder } = require("../queries/songs.js");
 const songValidator = require("../validations/checkSongs.js");
 
 //INDEX
@@ -25,6 +25,18 @@ songs.get("/:id", async (req, res) => {
         res.status(500).json({ error: "server error"})
     }
 }) 
+
+//ASCENDING ORDER
+songs.get("/?order=asc", async (req, res) => {
+    const songsAscOrder = await getSongsAscOrder();
+    res.status(200).json(songsAscOrder)
+});
+
+//DESCENDING ORDER
+songs.get("/?order=desc", async (req, res) => {
+    const songsDescOrder = await getSongsDescOrder();
+    res.status(200).json(songsDescOrder)
+});
 
 //CREATE
 songs.post("/", async (req, res) => {
@@ -53,5 +65,7 @@ songs.put("/:id", async (req, res) => {
     const updatedSong = await updateSong(id, req.body);
     res.status(200).json(updatedSong)
 });
+
+
 
 module.exports = songs;
