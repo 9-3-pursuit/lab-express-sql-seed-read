@@ -1,16 +1,15 @@
-const validateURL = (req, res, next) => {
-    if (
-      req.body.url.substring(0, 7) === "http://" ||
-      req.body.url.substring(0, 8) === "https://"
-    ) {
-      return next();
-    } else {
-      res
+
+
+const validateName = (req, res, next) => {
+    const { name } = req.body;
+    if (!name || name.trim() === "") {
+      return res
         .status(400)
-        .json({ error: "You forgot to start your URL with http:// or https://" });
+        .json({ error: "Song name is missing or it is an empty string" });
     }
+    return next();
   };
   
-  module.exports = {
-    validateURL
-  };
+  module.exports = validateName;
+  
+  

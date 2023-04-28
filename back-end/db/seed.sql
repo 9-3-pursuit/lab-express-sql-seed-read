@@ -20,4 +20,12 @@
  ('Billie Jean', 'Michael Jackson', 'Thriller', '4:54', True);
 
  SELECT * FROM songs;
- 
+
+
+ --SELECT * FROM songs WHERE id = 2;
+--INSERT INTO
+            --songs(name, artist, album, time, is_favorite)
+           -- VALUES
+            --('Baby', 'Ashanti', 'Ashanti', '4:31', TRUE)
+           -- RETURNING *;
+
