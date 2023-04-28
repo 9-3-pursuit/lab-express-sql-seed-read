@@ -16,18 +16,18 @@ import NavBar from "./Components/NavBar";
 function App() {
   return (
 <div className="App">
-      <h1>Tuner App 💿🎧</h1>
+     
       <Router>
         <NavBar />
         <main>
           <Routes>
             <Route path="/" element={<Home />} />
-            <Route path="/bookmarks" element={<Index />} />
-            <Route path="/bookmarks/new" element={<New />} />
-            <Route exact path="/bookmarks/:id" element={<Show />} />
-            <Route path="/bookmarks/:id/edit" element={<Edit />} />
+            <Route path="/songss" element={<Index />} />
+            <Route path="/songss/new" element={<New />} />
+            <Route exact path="/songss/:id" element={<Show />} />
+            <Route path="/songs/:id/edit" element={<Edit />} />
             <Route path="*" element={<FourOFour />} />
-          </Routes>
+          </Routes>``
         </main>
       </Router>
     </div>
