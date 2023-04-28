@@ -1,10 +1,10 @@
-// import Songs from "../Components/Songss";
+import Songs from "../Components/Songss";
 
 function Index() {
   return (
     <div className="Index">
       <h2>Index</h2>
-      {/* <Songs /> */}
+      <Songs />
     </div>
   );
 }
