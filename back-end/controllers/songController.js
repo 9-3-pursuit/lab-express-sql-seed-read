@@ -6,7 +6,9 @@ const {
     getAllSongs, 
     getOneSong, 
     addNewSong, 
-    deleteSong, 
+    updateSong,
+    deleteSong
+     
 } = require("../queries/songs.js");
 
 const validateName = require("../validations/validations.js");
@@ -62,8 +64,7 @@ songs.post(
           album,
           time,
           is_favorite,
-        });
-        console.log(res)
+        });console.log(res)
         return res.status(201).json(newSong);
       } catch (err) {
         console.error(err);
@@ -73,6 +74,28 @@ songs.post(
   );
 
   //UPDATE SONG INFORMATION
+  songs.put("/:id", validateName, async (req, res) => {
+    const { id } = req.params;
+    const song = req.body;
+  
+    console.log("PUT request received for song id:", id);
+    console.log("Updated song data:", song);
+  
+    try {
+      const updatedSong = await updateSong(id, song);
+  
+      console.log("Updated song result:", updatedSong);
+  
+      if (updatedSong.id) {
+        res.status(200).json(updatedSong);
+      } else {
+        res.status(404).json("Song not found");
+      }
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ error: "Server error" });
+    }
+  });
   
 
   //DELETE SONG FROM LIST

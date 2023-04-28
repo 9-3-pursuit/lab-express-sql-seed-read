@@ -42,6 +42,24 @@ const addNewSong = async (song) => {
     }
 };
 
+//UPDATE SONG
+const updateSong = async (id, song) => {
+    //songs/id
+    try {
+        const updatedSong = await db.one(`
+        UPDATE songs SET name=$1, artist=$2, album=$3, time=$4, is_favorite=$5, id=$6 RETURNING *`, 
+        [song.name, song.artist, song.album, song.time, song.is_favorite, id]
+        );
+        console.log(updatedSong); 
+        return updatedSong;
+    } catch(error) {
+        console.log(error); 
+        return error;
+    }
+}
+
+
+
 //DELETE SONG FROM LIST
 const deleteSong = async (id) => {
     //songs/id
@@ -66,5 +84,6 @@ module.exports = {
     getAllSongs,
     getOneSong,
     addNewSong,
-    deleteSong,
+    updateSong,
+    deleteSong
 }
