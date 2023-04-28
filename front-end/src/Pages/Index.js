@@ -1,4 +1,4 @@
-import Songs from "../Components/Songss";
+import Songs from "../Components/Songs";
 
 function Index() {
   return (

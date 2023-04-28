@@ -22,9 +22,9 @@ function App() {
         <main>
           <Routes>
             <Route path="/" element={<Home />} />
-            <Route path="/songss" element={<Index />} />
-            <Route path="/songss/new" element={<New />} />
-            <Route exact path="/songss/:id" element={<Show />} />
+            <Route path="/songs" element={<Index />} />
+            <Route path="/songs/new" element={<New />} />
+            <Route exact path="/songs/:id" element={<Show />} />
             <Route path="/songs/:id/edit" element={<Edit />} />
             <Route path="*" element={<FourOFour />} />
           </Routes>``
