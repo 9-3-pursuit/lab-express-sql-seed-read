@@ -1,24 +1,25 @@
-//import axios from "axios";
-import { useParams,useNavigate } from "react-router-dom";
+import axios from "axios";
+// import { useParams, useNavigate } from "react-router-dom";
 import React, { useState, useEffect } from "react";
 import Song from "./Song";
 
-// const API = process.env.REACT_APP_API_URL;
+const API = process.env.REACT_APP_API_URL;
 
 function Songs() {
   const [songs, setSongs] = useState([]);
-  let { index } = useParams();
-    let navigate = useNavigate();
+  // let { index } = useParams();
+  // let navigate = useNavigate();
+
   useEffect(() => {
-    fetch(`http://localhost:3333/songs/${index}`)
-    .then((response) => response.json())
-      .then((data) => {
-        setSongs(data);
+    axios
+      .get(`${API}/songs`)
+      .then((response) => {
+        setSongs(response.data);
       })
-      .catch(() => {
-        navigate("/not-found");
+      .catch((error) => {
+        console.warn("catch", error);
       });
-  }, [index,navigate]);
+  }, []);
   return (
     <div className="Songs">
       <h2>All Songs:</h2>
@@ -26,15 +27,15 @@ function Songs() {
         <table>
           <thead>
             <tr>
-              <th>Title: </th>
-              <th>Favorite ⭐️</th>
-              <th>Artist: </th>
-              <th>Time: </th>
+              <th>Title</th>
+              <th>Favorite</th>
+              <th>Artist</th>
+              <th>Time</th>
             </tr>
           </thead>
           <tbody>
-            {songs.map((song, index) => {
-              return <Song key={index} song={song} index={index} />;
+            {songs.map((song) => {
+              return <Song key={song.id} song={song} />;
             })}
           </tbody>
         </table>

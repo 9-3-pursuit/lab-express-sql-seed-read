@@ -1,60 +1,72 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import axios from "axios";
 import { useParams, Link, useNavigate } from "react-router-dom";
-import FourOFour from "../Pages/FourOFour";
+// import FourOFour from "../Pages/FourOFour";
+
+const API = process.env.REACT_APP_API_URL;
 
 function SongDetails() {
   const [songList, setSongList] = useState([]);
-  let { index } = useParams();
+  let { id } = useParams();
   let navigate = useNavigate();
 
   useEffect(() => {
     axios
-      .get(`http://localhost:3333/songs/${index}`)
+      .get(`${API}/songs/${id}`)
       .then((response) => {
-        // console.log(response.data);
+        console.log(response.data);
         setSongList(response.data);
       })
-      .catch(() => {
-        navigate(FourOFour);
+      .catch((error) => {
+        console.warn("catch:", error);
       });
-  }, [index, navigate]);
+  }, [id]);
 
   const handleDelete = () => {
-    axios.delete(`http://localhost:3333/songs/${index}`)
-    .then(() => {
-    navigate("/songs");
-    });
+    deleteSong();
+  };
+
+  const deleteSong = () => {
+    axios
+      .delete(`${URL}/songs/${ id }`)
+      .then(() => {
+        navigate("/songs");
+      })
+      .catch((error) => {
+        console.warn("catch:", error);
+      });
   };
 
   return (
-    <div className="songDetails">
-      <h1>Song Details ⤵</h1>
+    <article>
       <h3>
-        Name → {songList.name}
-        <br></br>
-        Favorite ⭐️ {songList.is_favorite}
-        <br></br>
-        Artist → {songList.artist}
-        <br></br>
-        Time → {songList.time}
-        <br></br>
+        {songList.is_favorite ? <span>⭐️</span> : null} {songList.name}
       </h3>
 
-      <div className="back-button">
-        <Link to={`http://localhost:3000/songs`}>
-          <button>Back</button>
-        </Link>
+      <h5>
+        <span>
+          <a href={songList.name}>{songList.artist}</a>
+        </span>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {songList.album}
+      </h5>
+      <h6>{songList.time}</h6>
+      <div className="songNavigation">
+        <div>
+          {" "}
+          <Link to={`/songs`}>
+            <button>Back</button>
+          </Link>
+        </div>
+        <div>
+          <Link to={`${API}/songs/edit`}>
+            <button>Edit</button>
+          </Link>
+        </div>
+        <div>
+          <button onClick={handleDelete}>Delete</button>
+        </div>
       </div>
-      <div className="edit-button">
-        <Link to={`http://localhost:3000/songs/new`}>
-          <button>Edit</button>
-        </Link>
-      </div>
-      <div className="delete-button">
-        <button onClick={handleDelete}>Delete</button>
-      </div>
-    </div>
+    </article>
   );
 }
 

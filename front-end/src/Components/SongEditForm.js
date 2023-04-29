@@ -1,8 +1,7 @@
 import axios from "axios";
 import React, { useState, useEffect } from "react";
 import { useParams, Link, useNavigate } from "react-router-dom";
-
-//  const API = process.env.REACT_APP_API_URL;
+ const API = process.env.REACT_APP_API_URL;
 
 function SongEditForm() {
   let { id } = useParams();
@@ -17,7 +16,7 @@ function SongEditForm() {
 
   const updateSong = (updatedSong) => {
     axios
-      .put(`http://localhost:3333/songs/${id}`, updatedSong)
+      .put(`${API}/songs/${id}`, updatedSong)
       .then(
         () => {
           navigate(`/songs/${id}`);
@@ -36,7 +35,7 @@ function SongEditForm() {
   };
 
   useEffect(() => {
-    axios.get(`http://localhost:3333/songs/${id}`).then(
+    axios.get(`${API}/songs/${id}`).then(
       (response) => setEditSong(response.data),
       (error) => navigate(`/not-found`)
     );
@@ -49,18 +48,18 @@ function SongEditForm() {
   return (
     <div className="Edit">
       <form onSubmit={handleSubmit}>
-        <label htmlFor="songName">Name:</label>
+        <label htmlFor="name">Name:</label>
         <input
-          id="songName"
+          id="name"
           value={editSong.name}
           type="text"
           onChange={handleTextChange}
           placeholder="Name of Song"
           required
         />
-        <label htmlFor="songArtist">Artist:</label>
+        <label htmlFor="artist">Artist:</label>
         <input
-          id="songArtist"
+          id="artist"
           value={editSong.artist}
           type="text"
           onChange={handleTextChange}
@@ -86,7 +85,7 @@ function SongEditForm() {
 
         <input type="submit" />
       </form>
-      <Link to={`/song/${id}`}>
+      <Link to={`/songs/${id}`}>
         <button>Nevermind!</button>
       </Link>
     </div>
