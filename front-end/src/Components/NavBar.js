@@ -4,7 +4,7 @@ export default function NavBar() {
   return (
     <nav>
       <h1>
-        <Link to="/songs">TUNER</Link>
+        <Link to="/songs">Tuner</Link>
       </h1>
       <button>
       
