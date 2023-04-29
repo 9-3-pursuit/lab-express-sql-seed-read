@@ -65,6 +65,7 @@ function SongNewForm() {
           name="album"
           value={song.album}
           onChange={handleTextChange}
+          required
         />
         <label htmlFor="time">Time:</label>
         <input
@@ -80,6 +81,7 @@ function SongNewForm() {
           type="checkbox"
           onChange={handleCheckboxChange}
           checked={song.is_favorite}
+          required
         />
 
         <br />
