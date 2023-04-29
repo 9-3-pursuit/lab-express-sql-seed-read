@@ -95,7 +95,7 @@ function SongEditForm() {
         <input type="submit" />
       </form>
       <Link to={`/songs/${id}`}>
-        <button>Nevermind!</button>
+        <button>Cancel</button>
       </Link>
     </div>
   );
