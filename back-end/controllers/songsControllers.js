@@ -80,7 +80,7 @@ songs.delete(":/id", async (req, res) => {
   const { id } = req.params;
   const goneSong = await deleteSong(id);
   if (goneSong.id) {
-    res.status(200).json(goneSong);
+    res.status(201).json(goneSong);
   } else {
     res.status(404).json("Song not found");
   }
