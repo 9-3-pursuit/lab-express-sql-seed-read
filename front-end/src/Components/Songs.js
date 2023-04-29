@@ -1,9 +1,10 @@
+// TODO: http://localhost:3000/songs/ -> shows index of all songs
 import axios from "axios";
 // import { useParams, useNavigate } from "react-router-dom";
 import React, { useState, useEffect } from "react";
 import Song from "./Song";
 
-const API = process.env.REACT_APP_API_URL;
+// const API = process.env.REACT_APP_API_URL;
 
 function Songs() {
   const [songs, setSongs] = useState([]);
@@ -12,7 +13,7 @@ function Songs() {
 
   useEffect(() => {
     axios
-      .get(`${API}/songs`)
+      .get(`http://localhost:3333/songs/`)
       .then((response) => {
         setSongs(response.data);
       })

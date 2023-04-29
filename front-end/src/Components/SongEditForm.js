@@ -1,7 +1,7 @@
+// TODO: http://localhost:3000/songs/edit/edit -> shows from to edit AFTER clicking Edit button
 import axios from "axios";
 import React, { useState, useEffect } from "react";
 import { useParams, Link, useNavigate } from "react-router-dom";
- const API = process.env.REACT_APP_API_URL;
 
 function SongEditForm() {
   let { id } = useParams();
@@ -10,13 +10,14 @@ function SongEditForm() {
   const [editSong, setEditSong] = useState({
     title: "",
     artist: "",
+    album: "",
     time: "",
     is_favorite: false,
   });
 
   const updateSong = (updatedSong) => {
     axios
-      .put(`${API}/songs/${id}`, updatedSong)
+      .put(`http://localhost:3333/songs/${id}`, updatedSong)
       .then(
         () => {
           navigate(`/songs/${id}`);
@@ -35,7 +36,7 @@ function SongEditForm() {
   };
 
   useEffect(() => {
-    axios.get(`${API}/songs/${id}`).then(
+    axios.get(`http://localhost:3333/songs/${id}`).then(
       (response) => setEditSong(response.data),
       (error) => navigate(`/not-found`)
     );
@@ -64,6 +65,14 @@ function SongEditForm() {
           type="text"
           onChange={handleTextChange}
           placeholder="Name of Artist"
+        />
+        <label htmlFor="album">Album:</label>
+        <input
+          id="album"
+          value={editSong.album}
+          type="text"
+          onChange={handleTextChange}
+          placeholder="Album"
         />
         <label htmlFor="time">Time:</label>
         <input

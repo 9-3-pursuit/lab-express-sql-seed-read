@@ -1,18 +1,16 @@
+// TODO: http://localhost:3000/songs/${id} -> shows selected song
+
 import { useState, useEffect } from "react";
 import axios from "axios";
-import { useParams, Link, useNavigate } from "react-router-dom";
-// import FourOFour from "../Pages/FourOFour";
-
-const API = process.env.REACT_APP_API_URL;
+import { Link, useParams } from "react-router-dom";
 
 function SongDetails() {
   const [songList, setSongList] = useState([]);
   let { id } = useParams();
-  let navigate = useNavigate();
 
   useEffect(() => {
     axios
-      .get(`${API}/songs/${id}`)
+      .get(`http://localhost:3333/songs/${id}`)
       .then((response) => {
         console.log(response.data);
         setSongList(response.data);
@@ -22,34 +20,27 @@ function SongDetails() {
       });
   }, [id]);
 
-  const handleDelete = () => {
-    deleteSong();
-  };
-
-  const deleteSong = () => {
-    axios
-      .delete(`${URL}/songs/${ id }`)
-      .then(() => {
-        navigate("/songs");
-      })
-      .catch((error) => {
-        console.warn("catch:", error);
-      });
-  };
-
   return (
-    <article>
+    <article className="Song-Details">
       <h3>
         {songList.is_favorite ? <span>⭐️</span> : null} {songList.name}
       </h3>
 
-      <h5>
-        <span>
-          <a href={songList.name}>{songList.artist}</a>
-        </span>
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {songList.album}
-      </h5>
-      <h6>{songList.time}</h6>
+      <span>
+        <h3>
+          Name: {songList.name}
+          <br></br>
+          Artist: {songList.artist}
+          <br></br>
+          Album: {songList.album}
+          <br></br>
+          Time: {songList.time}
+          <br></br>
+          Favorite: {songList.is_favorite}
+          <br></br>
+        </h3>
+      </span>
+
       <div className="songNavigation">
         <div>
           {" "}
@@ -58,12 +49,12 @@ function SongDetails() {
           </Link>
         </div>
         <div>
-          <Link to={`${API}/songs/edit`}>
+          <Link to={`/songs/${id}/edit`}>
             <button>Edit</button>
           </Link>
         </div>
         <div>
-          <button onClick={handleDelete}>Delete</button>
+          <button>Delete</button>
         </div>
       </div>
     </article>

@@ -1,15 +1,14 @@
+// TODO: http://localhost:3000/songs/new -> show form to ADD a new song
 import axios from "axios";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-
- const API = process.env.REACT_APP_API_URL;
 
 function SongNewForm() {
   let navigate = useNavigate();
 
   const addNewSong = (newSong) => {
     axios
-      .post(`${API}/songs/`, newSong)
+      .post(`http://localhost:3000/songs`, newSong)
       .then(
         () => {
           navigate(`/songs`);
@@ -22,6 +21,7 @@ function SongNewForm() {
   const [newAddedSong, setAddedSong] = useState({
     name: "",
     artist: "",
+    album: "",
     time: "",
     is_favorite: false,
   });
@@ -41,7 +41,7 @@ function SongNewForm() {
   return (
     <div className="New">
       <form onSubmit={handleSubmit}>
-        <label htmlFor="name">Name:</label>
+        <label htmlFor="name">Song Name:</label>
         <input
           id="name"
           value={newAddedSong.name}
@@ -58,6 +58,14 @@ function SongNewForm() {
           onChange={handleTextChange}
           placeholder="Name of Artist"
           required
+        />
+        <label htmlFor="album">Album:</label>
+        <input
+          id="album"
+          value={newAddedSong.album}
+          type="text"
+          onChange={handleTextChange}
+          placeholder="Album"
         />
         <label htmlFor="time">Time:</label>
         <input
