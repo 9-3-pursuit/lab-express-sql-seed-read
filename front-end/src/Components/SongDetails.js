@@ -4,57 +4,57 @@ import { useParams, Link, useNavigate } from "react-router-dom";
 import FourOFour from "../Pages/FourOFour";
 
 function SongDetails() {
-  const [song, setSong] = useState([]);
-  let { id } = useParams();
+  const [songList, setSongList] = useState([]);
+  let { index } = useParams();
   let navigate = useNavigate();
 
   useEffect(() => {
     axios
-      .get(`http://localhost:3333/songs/${id}`)
+      .get(`http://localhost:3333/songs/${index}`)
       .then((response) => {
-        console.log(response.data);
-        setSong(response.data);
+        // console.log(response.data);
+        setSongList(response.data);
       })
       .catch(() => {
         navigate(FourOFour);
       });
-  }, [id, navigate]);
+  }, [index, navigate]);
 
-//   const handleDelete = () => {
-//     axios.delete(`http://localhost:3333/songs/${id}`).then(() => {
-//       navigate("/songs");
-//     });
-//   };
+  const handleDelete = () => {
+    axios.delete(`http://localhost:3333/songs/${index}`)
+    .then(() => {
+    navigate("/songs");
+    });
+  };
 
   return (
-    <article>
+    <div className="songDetails">
       <h1>Song Details ⤵</h1>
       <h3>
-        Name → {song.name}
+        Name → {songList.name}
         <br></br>
-        Favorite ⭐️ {song.is_favorite}
+        Favorite ⭐️ {songList.is_favorite}
         <br></br>
-        Artist → {song.artist}
+        Artist → {songList.artist}
         <br></br>
-        Time → {song.time}
+        Time → {songList.time}
         <br></br>
       </h3>
-      <div className="showNavigation">
-        <div className="back-button">
-          <Link to={`/songs`}>
-            <button>Back</button>
-          </Link>
-        </div>
-        <div className="edit-button">
-          <Link to={`/songs/${id}/edit`}>
-            <button>Edit</button>
-          </Link>
-        </div>
-        <div className="delete-button">
-          <button >Delete</button>
-        </div>
+
+      <div className="back-button">
+        <Link to={`http://localhost:3000/songs`}>
+          <button>Back</button>
+        </Link>
       </div>
-    </article>
+      <div className="edit-button">
+        <Link to={`http://localhost:3000/songs/new`}>
+          <button>Edit</button>
+        </Link>
+      </div>
+      <div className="delete-button">
+        <button onClick={handleDelete}>Delete</button>
+      </div>
+    </div>
   );
 }
 
