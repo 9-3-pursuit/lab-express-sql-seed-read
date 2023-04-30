@@ -2,7 +2,7 @@ import SongDetails from "../Components/SongDetails";
 
 function Show() {
   return (
-    <div className="Show">
+    <div className="Song-Details">
       <h2>Show</h2>
       <SongDetails />
     </div>
