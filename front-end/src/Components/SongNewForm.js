@@ -1,6 +1,7 @@
+import React from "react";
 import axios from "axios";
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 
 const API = process.env.REACT_APP_API_URL;
 
@@ -48,6 +49,7 @@ function SongNewForm() {
           value={song.name}
           type="text"
           onChange={handleTextChange}
+          placeholder="Name of Song"
           required
         />
         <label htmlFor="artist">Artist:</label>
@@ -56,6 +58,7 @@ function SongNewForm() {
           type="text"
           value={song.artist}
           onChange={handleTextChange}
+          placeholder="Name of Artist"
           required
         />
         <label htmlFor="album">Album:</label>
@@ -65,6 +68,7 @@ function SongNewForm() {
           name="album"
           value={song.album}
           onChange={handleTextChange}
+          placeholder="Name of Album"
           required
         />
         <label htmlFor="time">Time:</label>
@@ -74,6 +78,8 @@ function SongNewForm() {
           name="time"
           value={song.time}
           onChange={handleTextChange}
+          placeholder="Duration of Song"
+          required
         />
         <label htmlFor="is_favorite">Favorite:</label>
         <input
@@ -85,7 +91,12 @@ function SongNewForm() {
         />
 
         <br />
-        <input type="submit" />
+        <div className=''></div>
+          <div className='nav-buttons'>
+            <Link to={"/songs"}><button>Back</button></Link>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          <button type="submit">Submit</button>
+          </div>     
       </form>
     </div>
   );
