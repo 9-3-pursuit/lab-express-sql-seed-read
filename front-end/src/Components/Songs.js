@@ -18,14 +18,14 @@ function Songs() {
 
   return (
     <div>
-      <table>
+      <table className="table table-striped">
         <thead>
           <tr>
             <th>Serial #</th>
             <th>Song Title</th>
             <th>Song Artist</th>
             <th>Song Album</th>
-            <th>Song Category</th>
+            <th>Song Duration</th>
             <th>Favorite Song</th>
           </tr>
         </thead>
