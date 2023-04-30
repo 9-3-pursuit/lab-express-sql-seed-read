@@ -205,7 +205,7 @@ describe("Songs", () => {
 
           const parsedRes = JSON.parse(response.text);
           expect(response.statusCode).toBe(200);
-          expect(!!parsedRes.id).toBe(true);
+         expect(!!parsedRes.id).toBe(true);
           expect(parsedRes.artist).toEqual("Mojave 3");
           expect(parsedRes.name).toEqual("Bluebird of Happiness");
           expect(parsedRes.is_favorite).toEqual(true);
