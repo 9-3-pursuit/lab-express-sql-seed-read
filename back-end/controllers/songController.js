@@ -35,7 +35,7 @@ songs.get("/:id", async (req, res) => {
 });
 
 // CREATE
-songs.post("/", async (req, res) => {
+songs.post("/", songValidator, async (req, res) => {
     const { name, artist, album, time, is_favorite } = req.body;
     const newSong = await createSong({name, artist, album, time, is_favorite});
     if(!newSong.error) {
@@ -47,7 +47,7 @@ songs.post("/", async (req, res) => {
 });
 
 // UPDATE
-songs.put("/:id", async (req, res) => {
+songs.put("/:id", songValidator, async (req, res) => {
     const { id } = req.params;
     const song = req.body;
     const updatedSong = await updateSong(id, song);
