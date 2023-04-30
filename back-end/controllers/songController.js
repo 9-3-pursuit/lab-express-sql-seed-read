@@ -62,13 +62,13 @@ songs.post(
 // Update a song
 songs.put(
     '/:id',
-    validateURL,
     validateFavoriteSong,
     validateSongName,
     validateArtistName,
     async (req, res) => {
-        const { id } = req.params;
         const song = req.body;
+        const { id } = req.params;
+
         const updatedSong = await updateSong(id, song);
         //console.log(updatedSong);
             if (updatedSong.id) {
