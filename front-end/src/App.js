@@ -10,8 +10,8 @@ import New from "./Pages/New";
 import Show from "./Pages/Show";
 
 // COMPONENTS
-import Header from "../Components/Header";
-import NavBar from "../Components/NavBar";
+import Header from "./Components/Header";
+import NavBar from "./Components/NavBar";
 
 function App() {
   return (
