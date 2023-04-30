@@ -18,7 +18,7 @@ function Songs() {
   return (
     <div className="Songs">
       <section>
-        <table>
+        <table className="Songs">
           <thead>
             <tr>
               <th scope="col">Fav</th>
