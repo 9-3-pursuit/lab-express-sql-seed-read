@@ -20,12 +20,12 @@ function App() {
       <Header />
       <NavBar />
       <Routes>
-        <Route path="/" element={<Home/>} />
-        <Route path="/songs" element={<Index/>} />
-        <Route path="/songs/new" element={<New/>} />
-        <Route path="/songs/:id" element={<Show/>} />
-        <Route path="/songs/:id/edit" element={<Edit/>} />
-        <Route path="*" element={<FourOFour/>} />
+        <Route path="/" element={<Home />} />
+        <Route path="/songs" element={<Index />} />
+        <Route path="/songs/new" element={<New />} />
+        <Route path="/songs/:id" element={<Show />} />
+        <Route path="/songs/:id/edit" element={<Edit />} />
+        <Route path="*" element={<FourOFour />} />
       </Routes>
     </Router>
     </div>

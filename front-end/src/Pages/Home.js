@@ -1,4 +1,9 @@
 
+
 export default function Home() {
-  return;
+  return (
+    <div>
+      <h1>Welcome to your Playlist</h1>
+    </div>
+  )
 }
