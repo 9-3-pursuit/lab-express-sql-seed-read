@@ -17,8 +17,8 @@ function Songs() {
   }, []);
 
   return (
-    <div>
-      <table className="table-auto w-full bg-pink-200">
+    <div className="Song">
+      <table className="Songs table-auto w-full bg-pink-200">
         <thead>
           <tr>
             <th className="px-4 py-2">#</th>
@@ -31,7 +31,7 @@ function Songs() {
         </thead>
         <tbody>
           {songs.map((song, index) => {
-            return <Song key={index} song={song} />;
+            return <Song key={index} song={song} index={index}/>;
           })}
         </tbody>
       </table>
