@@ -7,22 +7,24 @@ const API = process.env.REACT_APP_API_URL;
 function Songs() {
   const [songs, setSongs] = useState([]);
   useEffect(() => {
-    axios.get(`${API}/songs`).then((response) => {
+    axios.get(`${API}/songs`)
+    .then((response) => {
       setSongs(response.data)
     }).catch((e) => {
       console.warn("catch", e)
     });
   }, []);
+
   return (
     <div className="Songs">
       <section>
         <table>
           <thead>
             <tr>
-              <th>Fav</th>
-              <th>Song</th>
-              <th>Artist</th>
-              <th>Time</th>
+              <th scope="col">Fav</th>
+              <th scope="col">Song</th>
+              <th scope="col">Artist</th>
+              <th scope="col">Time</th>
             </tr>
           </thead>
           <tbody>
