@@ -1,3 +1,4 @@
+import React from "react";
 import { useState, useEffect } from "react";
 import { useParams, Link, useNavigate } from "react-router-dom";
 import axios from "axios";
@@ -10,13 +11,14 @@ function SongDetails() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    axios.get(`${API}/songs/${id}`).then((response) => {
+    axios.get(`${API}/songs/${id}`)
+    .then((response) => {
       console.log(response.data)
       setSong(response.data)
     }).catch((e) => {
       console.warn("catch:", e)
     })
-  }, [id])
+  }, [id]);
 
   const handleDelete = () => {
     // console.log("I clicked delete");
@@ -39,7 +41,7 @@ return (
     <h1>{song.is_favorite ? <span>⭐️</span> : null} {song.name} - By {song.artist}</h1>
     <h2>
       <span>
-        <a href={song.album}></a>
+        <a href={song.album}>Album:</a>
       </span>
       &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {song.album}
     </h2>
