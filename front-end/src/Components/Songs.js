@@ -18,7 +18,7 @@ function Songs() {
 
   return (
     <div>
-      <table className="table-auto w-full bg-pink-50">
+      <table className="table-auto w-full">
         <thead>
           <tr>
             <th className="px-4 py-2">#</th>
