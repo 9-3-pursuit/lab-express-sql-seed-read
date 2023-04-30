@@ -18,15 +18,15 @@ function Songs() {
 
   return (
     <div>
-      <table className="table table-striped">
+      <table className="table-auto w-full bg-pink-50">
         <thead>
           <tr>
-            <th>Serial #</th>
-            <th>Song Title</th>
-            <th>Song Artist</th>
-            <th>Song Album</th>
-            <th>Song Duration</th>
-            <th>Favorite Song</th>
+            <th className="px-4 py-2">#</th>
+            <th className="px-4 py-2">Title</th>
+            <th className="px-4 py-2">Artist</th>
+            <th className="px-4 py-2">Album</th>
+            <th className="px-4 py-2">Duration</th>
+            <th className="px-4 py-2">Favorite</th>
           </tr>
         </thead>
         <tbody>
