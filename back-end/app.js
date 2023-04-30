@@ -1,6 +1,6 @@
 const express = require("express");
 const cors = require("cors");
-const songsRouter = require("./controllers/songsController");
+const songsRouter = require("./controllers/songController");
 
 const app = express();
 
@@ -14,7 +14,7 @@ app.get("/", (req, res) => {
 app.use("/songs", songsRouter);
 
 app.get("*", (req, res) => {
-  res.status(404).send("Resource could not be found");
+  res.status(400).send("Resource could not be found");
 });
 
 module.exports = app;
