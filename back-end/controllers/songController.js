@@ -12,11 +12,11 @@ const {
 songsRouter
   .route("/")
   .get(async (req, res) => {
-    const allSongs = await getAllSongs();
+    const allSongs = await getAllSongs(req.query.order, req.query.is_favorite);
     if (allSongs[0]) {
       res.status(200).json(allSongs);
     } else {
-      res.status(400).json({ Error: "No song could found" });
+      res.status(400).json({ Error: "No song could be found" });
     }
   })
   .post(songValidator, async (req, res) => {

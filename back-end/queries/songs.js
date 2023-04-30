@@ -1,8 +1,26 @@
 const db = require("../db/dbConfig.js");
 
-const getAllSongs = async () => {
+const getAllSongs = async (order = undefined, is_favorite = undefined) => {
+  let baseQuery = "SELECT * FROM songs";
+  if (is_favorite) {
+    if (is_favorite === "true") {
+      baseQuery += " WHERE is_favorite=true";
+    }
+    if (is_favorite === "false") {
+      baseQuery += " WHERE is_favorite=false";
+    }
+  }
+  if (order) {
+    if (order.toLowerCase() === "desc") {
+      baseQuery += " ORDER BY name DESC";
+    }
+    if (order.toLowerCase() === "asc") {
+      baseQuery += " ORDER BY name ASC";
+    }
+  }
+
   try {
-    const result = await db.any("SELECT * FROM songs;");
+    const result = await db.any(baseQuery);
     return result;
   } catch (error) {
     return error;
