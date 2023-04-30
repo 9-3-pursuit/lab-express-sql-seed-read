@@ -16,8 +16,9 @@ function Song({ song }) {
         </a>
       </td>
       <td>
-        <Link to={`/songs/${song.id}`}>✏️</Link>
+        <Link to={`/songs/${song.id}`}>{song.artist}</Link>      
       </td>
+      <td className="td">{song.time}</td>
     </tr>
   );
 }
