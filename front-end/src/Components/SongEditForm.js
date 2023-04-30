@@ -1,3 +1,4 @@
+import React from "react";
 import axios from "axios";
 import { useState, useEffect } from "react";
 import { useParams, Link, useNavigate } from "react-router-dom";
@@ -37,9 +38,10 @@ function SongEditForm() {
   };
 
   useEffect(() => {
-    axios.get(`${API}/songs/${id}`).then(
-      (response) => setSong(response.data)
-    //   (error) => navigate(`/not-found`)
+    axios.get(`${API}/songs/${id}`)
+    .then(
+      (response) => setSong(response.data),
+      //(error) => navigate(`/not-found`)
     );
   }, [id, navigate]);
 
@@ -47,6 +49,7 @@ function SongEditForm() {
     event.preventDefault();
     updatedSong(song, id);
   };
+
   return (
     <div className="Edit">
       <form onSubmit={handleSubmit}>
@@ -56,16 +59,20 @@ function SongEditForm() {
           value={song.name}
           type="text"
           onChange={handleTextChange}
+          placeholder="Name of Song"
           required
         />
+        <br/>
         <label htmlFor="artist">Artist:</label>
         <input
           id="artist"
           type="text"
           value={song.artist}
           onChange={handleTextChange}
+          placeholder="Name of Artist"
           required
         />
+        <br/>
         <label htmlFor="album">Album:</label>
         <input
           id="album"
@@ -73,15 +80,21 @@ function SongEditForm() {
           name="album"
           value={song.album}
           onChange={handleTextChange}
+          placeholder="Name of Album"
+          required
         />
-         <label htmlFor="time">Time:</label>
+        <br/>
+        <label htmlFor="time">Time:</label>
         <input
           id="time"
           type="text"
           name="time"
           value={song.time}
           onChange={handleTextChange}
+          placeholder="Duration of Song"
+          required
         />
+        <br/>
         <label htmlFor="is_favorite">Favorite:</label>
         <input
           id="is_favorite"
@@ -89,14 +102,14 @@ function SongEditForm() {
           onChange={handleCheckboxChange}
           checked={song.is_favorite}
         />
-
-        <br />
-
-        <input type="submit" />
+        <br/>
+        <div className='nav-buttons'>
+          <Link to={`/songs/${id}`}><button>Back</button></Link> 
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          <button type="submit">Submit</button>
+        </div>
       </form>
-      <Link to={`/songs/${id}`}>
-        <button>Cancel</button>
-      </Link>
+      
     </div>
   );
 }
