@@ -11,7 +11,7 @@ function SongDetails() {
     is_favorite: "",
   });
 
-  let { id } = useParams(); // getting index from URL
+  let { id } = useParams(); 
   let navigate = useNavigate();
 
   useEffect(() => {

@@ -23,21 +23,21 @@ function SongEditForm() {
 
   useEffect(() => {
     axios
-      .get(`${process.env.REACT_APP_API_URL}/transactions/${id}`)
+      .get(`${process.env.REACT_APP_API_URL}/songs/${id}`)
       .then((res) => {
         setEditSong(res.data);
       })
       .catch((error) => {
         console.log("catch", error);
       });
-  }, []);
+  }, [id]);
 
   function handleSubmit(event) {
     event.preventDefault();
     axios
-      .post(`${process.env.REACT_APP_API_URL}/songs`, editSong)
+      .put(`${process.env.REACT_APP_API_URL}/songs/${id}`, editSong)
       .then(() => {
-        navigate("/songs");
+        navigate(`/songs/${id}`);
       })
       .catch((error) => {
         console.log(error);
@@ -119,6 +119,7 @@ function SongEditForm() {
               type="checkbox"
               className="mr-2"
               onChange={handleCheckboxChange}
+              checked={editSong.is_favorite}
             />
           </label>
         </div>
