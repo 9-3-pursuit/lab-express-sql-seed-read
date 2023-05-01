@@ -23,7 +23,7 @@ function App() {
             <Route path="/songs" element={<Index />} />
             <Route path="/songs/new" element={<New />} />
             <Route path="*" element={<FourOFour />} />
-            <Route path="/songs/:index" element={<Show />} />
+            <Route path="/songs/:id" element={<Show />} />
           </Routes>
         </main>
       </BrowserRouter>

@@ -8,7 +8,6 @@ function Songs() {
     fetch(`${process.env.REACT_APP_API_URL}/songs`)
       .then((response) => response.json())
       .then((data) => {
-        console.log(data);
         setSongs(data);
       })
       .catch((error) => {
