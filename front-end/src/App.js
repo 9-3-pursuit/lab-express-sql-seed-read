@@ -14,8 +14,8 @@ function App() {
       <Route path="/" element={<Home/>}/>
       <Route path="/new" element={<New/>}/>
       <Route path="/songs" element={<Index/>}/>
-      <Route path="/songs/:index" element={<Show/>}/>
-      <Route path="/songs/:index/edit" element={<Edit/>}/>
+      <Route path="/songs/:id" element={<Show/>}/>
+      <Route path="/songs/:id/edit" element={<Edit/>}/>
     </Routes>
     </BrowserRouter>
   );

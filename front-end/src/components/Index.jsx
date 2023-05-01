@@ -24,7 +24,7 @@ function Index() {
             <tbody>
                 {songs ? songs.map((song, index) =>  
                 <tr key={index}>
-                    <td><Link to={`/songs/${index+1}`}>{song.name}</Link></td>
+                    <td><Link to={`/songs/${song.id}`}>{song.name}</Link></td>
                     <td>{song.artist}</td>
                     <td>{song.album}</td>
                     <td>{song.time}</td>
