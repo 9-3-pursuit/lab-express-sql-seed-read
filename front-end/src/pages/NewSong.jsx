@@ -52,7 +52,7 @@ const NewSong = () => {
             <label htmlFor="is_favorite">Is Favorite: </label>
             <input type="checkbox" id="is_favorite" name="is_favorite" checked={newMusic.is_favorite} onChange={handleTextChange} />
               <br/> <br/>
-            <button type="submit">Add Song</button>
+            <button className='nav-button' type="submit">Add Song</button>
           </form>
         </div>
       );
