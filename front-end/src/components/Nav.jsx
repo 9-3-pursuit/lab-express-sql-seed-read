@@ -9,7 +9,7 @@ function Nav() {
             <Link to={"/songs"}>
                 Veiw Songs
             </Link>
-            <Link to={"/new"}>
+            <Link to={"/songs/new"}>
                 New Song
             </Link>
         </div>
