@@ -1,7 +1,7 @@
 import {Route, BrowserRouter, Routes} from "react-router-dom"
 import Home from "./components/Home.jsx"
 import Index from "./components/Index.jsx"
-import Show from "./components/Index.jsx"
+import Show from "./components/Show.jsx"
 import Edit from "./components/Edit.jsx"
 import New from "./components/New.jsx"
 import Nav from "./components/Nav.jsx"
