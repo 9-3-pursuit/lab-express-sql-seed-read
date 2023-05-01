@@ -24,6 +24,7 @@ function App() {
             <Route path="/songs/new" element={<New />} />
             <Route path="*" element={<FourOFour />} />
             <Route path="/songs/:id" element={<Show />} />
+            <Route path="/songs/:id/edit" element={<Edit />} />
           </Routes>
         </main>
       </BrowserRouter>
@@ -32,7 +33,3 @@ function App() {
 }
 
 export default App;
-
-/*
-              <Route path="/budgets/:index/edit" element={<Edit />} />
-*/
