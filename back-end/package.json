@@ -1,5 +1,6 @@
 {
   "name": "back-end",
+  "proxy": "http://localhost:3331",
   "version": "1.0.0",
   "description": "- `touch .env`",
   "main": "app.js",
