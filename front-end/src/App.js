@@ -22,7 +22,7 @@ function App() {
         <Header className="w-full" />
         <div className="flex flex-grow">
           <NavBar className="w-1/4 flex-shrink-0" />
-          <Routes className="flex-grow">
+          <Routes className="flex-grow-1">
             <Route path="/" element={<Home />} />
             <Route path="/songs" element={<Index />} />
             <Route path="/songs/new" element={<New />} />
