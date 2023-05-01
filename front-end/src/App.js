@@ -5,12 +5,14 @@ import Show from "./components/Show.jsx"
 import Edit from "./components/Edit.jsx"
 import New from "./components/New.jsx"
 import Nav from "./components/Nav.jsx"
+import Error from "./components/Error.jsx"
 
 function App() {
   return (
     <BrowserRouter>
     <Nav/>
     <Routes>
+      <Route path="*" element={<Error/>}/> 
       <Route path="/" element={<Home/>}/>
       <Route path="/songs" element={<Index/>}/>
       <Route path="/songs/new" element={<New/>}/>
