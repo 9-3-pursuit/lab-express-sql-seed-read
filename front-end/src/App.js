@@ -15,7 +15,7 @@ import NavBar from "./Components/NavBar";
 
 function App() {
   return (
-    <div className="">
+    <div className="h-full w-full bg-light">
     <Router>
       <Header />
       <NavBar />
