@@ -11,6 +11,7 @@ import Show from "./Pages/Show";
 
 // COMPONENTS
 import Header from "./Components/Header";
+import Footer from "./Components/Footer";
 import NavBar from "./Components/NavBar";
 
 function App() {
@@ -27,6 +28,7 @@ function App() {
         <Route path="/songs/:id/edit" element={<Edit />} />
         <Route path="*" element={<FourOFour />} />
       </Routes>
+      <Footer />
     </Router>
     </div>
   );

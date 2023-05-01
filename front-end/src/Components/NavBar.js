@@ -1,7 +1,9 @@
-
+import { Link } from "react-router-dom";
 
 export default function NavBar() {
     return (
-        <div></div>
+        <div>
+            <Link to={"/songs"} />
+        </div>
     )
 }
