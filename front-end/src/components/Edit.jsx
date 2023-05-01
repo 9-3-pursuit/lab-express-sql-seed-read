@@ -22,7 +22,7 @@ function Edit() {
     }
 
     useEffect(() => {
-        axios.get(`${process.env.REACT_APP_API_URL}/transactions/${id}`)
+        axios.get(`${process.env.REACT_APP_API_URL}/songs/${id}`)
         .then((res) => {
             setEditSong(res.data);
         })
@@ -33,14 +33,14 @@ function Edit() {
 
     function handleSubmit (event) {
         event.preventDefault();
-        axios.post(`${process.env.REACT_APP_API_URL}/songs`, editSong)
+        axios.put(`${process.env.REACT_APP_API_URL}/songs/${id}`, editSong)
         .then(() => {
             navigate("/songs")
         })
         .catch((error) => {
             console.log(error);
         });
-    }
+    } 
     
   return (
     <div>
@@ -82,9 +82,9 @@ function Edit() {
             type="checkbox" 
             id="is_favorite"
             name="is_favorite"
-            required
             onChange={handleCheckboxChange}
             value={editSong.is_favorite}/>
+            <button type="submit">Submit</button>
         </form>
     </div>
   )
