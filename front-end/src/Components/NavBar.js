@@ -2,7 +2,6 @@ import { Link } from "react-router-dom";
 import {
   FaHome,
   FaHeadphones,
-  FaLaptop,
   FaPlus,
   FaLayerGroup,
 } from "react-icons/fa";
@@ -21,7 +20,7 @@ export default function NavBar() {
         </div>
         <div className="flex flex-col gap-6">
           <div className="flex items-center justify-start pl-2 gap-2 group">
-            <FaLaptop className="group-hover:text-secondary" />
+            <FaHome className="group-hover:text-secondary" />
             <Link to={"/"}>Home</Link>
           </div>
           <div className="flex items-center justify-start pl-2 gap-2 group">
