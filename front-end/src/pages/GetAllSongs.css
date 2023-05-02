@@ -1,3 +1,20 @@
 .Song{
     color: whitesmoke
 }
+
+.link-style{
+    color:red;
+}
+
+.link-style:visited {
+    color: #4CAF50;; 
+
+  }
+
+  .link-style:hover {
+    color: orange; 
+  }
+  
+
+  
+  

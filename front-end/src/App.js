@@ -31,7 +31,8 @@ function App() {
           <Route element={<GetOneSong />} path='/songs/:id' />
           <Route element={<NewSong />} path='/songs/new' />
           <Route element={<MyFavorites />} path='/songs/my-favorites/' />
-          <Route element={<Error/>} path='/*'/> 
+          <Route element={<Error />} path='/*' /> 
+          <Route element={<Error/>} path='/songs/*' />
         </Routes>
         {/* <Footer/>  */}
       </BrowserRouter>

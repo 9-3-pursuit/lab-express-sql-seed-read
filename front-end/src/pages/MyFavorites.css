@@ -2,3 +2,22 @@
     color: whitesmoke;
     margin-left: 40px
 }
+
+.link-style{
+    color:red;
+}
+
+.link-style:visited {
+    color: #4CAF50; 
+
+  }
+
+  .link-style:hover {
+    color: orange; 
+  }
+
+  .scroll {
+    height: 500px; 
+    overflow: scroll;
+  }
+  

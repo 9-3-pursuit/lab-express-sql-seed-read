@@ -24,13 +24,26 @@ const GetOneSong = () => {
 
 
     useEffect(() => {
-        axios.get(`${process.env.REACT_APP_BACKEND_API}/songs/${id}`)
-          .then(response => {
-            setOneSong(response.data)
-            setReview({ review: response.data.review })
-            })
-            .catch(error => console.log(error))
-    }, [id])
+      axios
+        .get(`${process.env.REACT_APP_BACKEND_API}/songs/${id}`)
+        .then((response) => {
+          if (response.data) {
+            setOneSong(response.data);
+            setReview({ review: response.data.review });
+          } else {
+            navigate("/error-404");
+          }
+        })
+        .catch((error) => {
+          if (error.response && error.response.status === 404) {
+            navigate("/error-404");
+          } else {
+            console.log(error);
+          }
+        });
+    }, [id, navigate]);
+    
+    
   
     const handleTextChange = (event) => {
 
@@ -77,13 +90,13 @@ const GetOneSong = () => {
               <p>Album: {oneSong.album}</p>
               <p>Is Favorite: {oneSong.is_favorite ? '⭐️': '❌'}</p>
               <p>Duration: {oneSong.time}</p>
-              <p>Review: {oneSong.review}</p>
+              <p className="review">Review: {oneSong.review}</p>
             </>
         }
         
-        <textarea name="review" id="review" value={oneSong.review === null ? '' : oneSong.review} onChange={handleTextChange} ></textarea>
+        <textarea className="text-area" name="review" id="review" value={oneSong.review === null ? '' : oneSong.review} onChange={handleTextChange} ></textarea>
         <br/>
-        <button className='nav-button'>Submit Review</button>
+        <button className='nav-button2'>Submit Review</button>
             
             <EditButton/>
             <Delete />

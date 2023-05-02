@@ -29,7 +29,7 @@ const GetAllSongs = () => {
             {allSongs.map((song) => {
                 return <div className="Songs" key={song.id}>
                     <td>
-                    <Link to={`/songs/${song.id}`}>
+                    <Link className="link-style" to={`/songs/${song.id}`}>
                     <h3>Song Name: {song.name}</h3>
                     </Link></td>
                     <td><p>Album: {song.album}</p></td>

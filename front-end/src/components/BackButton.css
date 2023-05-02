@@ -13,3 +13,9 @@
     text-shadow: 2px 2px 4px #000000;
     margin-bottom: 5px;
 }
+
+.nav-button:hover{
+    cursor: pointer;
+    background-color: black;
+    color: orange
+}

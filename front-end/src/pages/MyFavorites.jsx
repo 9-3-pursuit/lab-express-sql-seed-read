@@ -21,12 +21,12 @@ const MyFavorites = () => {
     const favoriteSongs = myFavorites.filter((song) => song.is_favorite)
 
     return (
-        <form>
+        <form className="scroll">
 
             {favoriteSongs.map((favorite) => {
                 return <div className='favorite' key={favorite.id}>
                     
-                    <Link to={`/songs/${favorite.id}`}><h3>Name: {favorite.name}</h3></Link>
+                    <Link className="link-style" to={`/songs/${favorite.id}`}><h3>Name: {favorite.name}</h3></Link>
                     <p>Artist: {favorite.artist }</p>
                     <p>Album: {favorite.album }</p>
                     <p>Duration: {favorite.time }</p>

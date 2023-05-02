@@ -29,6 +29,11 @@ const NewSong = () => {
         
     }
 
+    const handleCheckboxChange = (event) => {
+      const { name, checked } = event.target;
+      setNewMusic((previousState) => ({ ...previousState, [name]: checked }));
+    }
+    
        
         
     
@@ -38,19 +43,19 @@ const NewSong = () => {
          <br/> <br/>
           <form onSubmit={handleSubmit}>
             <label htmlFor="name">Song Name: </label>
-            <input type="text" id="name" name="name" value={newMusic.name} required onChange={handleTextChange} />
+            <input type="text" className="text-box" id="name" name="name" value={newMusic.name} required onChange={handleTextChange} />
               <br/> <br/>
             <label htmlFor="artist">Artist: </label>
-            <input type="text" id="artist" name="artist" value={newMusic.artist} required onChange={handleTextChange} />
+            <input type="text" className="text-box" id="artist" name="artist" value={newMusic.artist} required onChange={handleTextChange} />
               <br/> <br/>
             <label htmlFor="album">Album: </label>
-            <input type="text" id="album" name="album" value={newMusic.album} required onChange={handleTextChange} />
+            <input type="text" className="text-box" id="album" name="album" value={newMusic.album} required onChange={handleTextChange} />
               <br/> <br/>
             <label htmlFor="time">Time: </label>
-            <input type="text" id="time" name="time" value={newMusic.time} required onChange={handleTextChange} />
+            <input type="text" className="text-box" id="time" name="time" value={newMusic.time} required onChange={handleTextChange} />
               <br/> <br/>
             <label htmlFor="is_favorite">Is Favorite: </label>
-            <input type="checkbox" id="is_favorite" name="is_favorite" checked={newMusic.is_favorite} onChange={handleTextChange} />
+            <input type="checkbox" className="check-box" id="is_favorite" name="is_favorite" checked={newMusic.is_favorite} onChange={handleCheckboxChange} />
               <br/> <br/>
             <button className='nav-button' type="submit">Add Song</button>
           </form>

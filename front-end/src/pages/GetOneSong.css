@@ -1,3 +1,51 @@
 .Song{
     margin-left: 20px;
+    height: 500px;
+    overflow: scroll;
+}
+
+.Songs{
+    margin-left: 20px;
+}
+  
+
+.nav-button2{
+    margin-right: 2px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    border-radius: 5px;
+    text-shadow: 2px 2px 4px #000000;
+    margin-bottom: 5px;
+    margin-top: 20px;
+}
+
+.nav-button2:hover{
+    cursor: pointer;
+    background-color: black;
+    color: orange
+}
+
+.text-area{
+    width: 500px;
+    height: 200px;
+    border-radius: 10px;
+    opacity: .45;
+    font-size: x-large;
+}
+
+.text-area:hover{
+    background-color: black;
+    color: orange;
+    font-size: x-large;
+}
+
+.review{
+    width: 500px;
+    word-wrap: break-word;
 }

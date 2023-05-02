@@ -27,7 +27,7 @@ const Delete = () => {
     return (
       <div>
         
-        <button className="nav-button" onClick={handleDelete}>Delete</button>
+        <button className="nav-button3" onClick={handleDelete}>Delete</button>
         
       </div>
     )
