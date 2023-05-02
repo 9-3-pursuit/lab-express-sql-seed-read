@@ -26,7 +26,7 @@ const MyFavorites = () => {
             {favoriteSongs.map((favorite) => {
                 return <div className='favorite' key={favorite.id}>
                     
-                    <Link className="link-style" to={`/songs/${favorite.id}`}><h3>Name: {favorite.name}</h3></Link>
+                    <Link className="link-style" to={`/songs/${favorite.id}`}><h3>Song Name: {favorite.name}</h3></Link>
                     <p>Artist: {favorite.artist }</p>
                     <p>Album: {favorite.album }</p>
                     <p>Duration: {favorite.time }</p>
