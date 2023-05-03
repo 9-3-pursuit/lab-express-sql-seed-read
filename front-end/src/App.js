@@ -17,7 +17,7 @@ import Aside from "./Components/Aside";
 
 function App() {
   return (
-    <div className="h-full w-full bg-light min-h-screen flex flex-col">
+    <div className="h-full w-full  min-h-screen flex flex-col">
       <Router>
         <Header className="w-full" />
         <div className="flex flex-grow">
