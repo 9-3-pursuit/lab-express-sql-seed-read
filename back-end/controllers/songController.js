@@ -3,6 +3,7 @@
 
 const express = require('express');
 const songs = express.Router();
+const {validateNAF} = require('../Validations/validation')
 
 const {
     getAllSongs,
@@ -39,7 +40,7 @@ songs.get("/:id", async(req, res) => {
   
 //create 
 //POST /songs
-          songs.post("/",  async (req, res) => {
+          songs.post("/", validateNAF, async (req, res) => {
             const newSong = await createSong(req.body);
             if (!newSong.error) {
                 res.status(200).json(newSong);
@@ -52,7 +53,7 @@ songs.get("/:id", async(req, res) => {
 
 //update
 //PUT /songs/:id
- songs.put("/:id", 
+ songs.put("/:id", validateNAF,
     async (req, res) => { 
         const { id } = req.params;
     const updatedSong = await updateSong(id, req.body);
