@@ -10,7 +10,6 @@ const {
 } = require("../queries/songs.js");
 
 const {
-    validateURL,
     validateFavoriteSong,
     validateSongName,
     validateArtistName,

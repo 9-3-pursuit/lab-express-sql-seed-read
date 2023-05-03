@@ -1,16 +1,3 @@
-const validateURL = (req, res, next) => { // http://, https://
-
-    if (
-        req.body.url.substring(0-7) === "http://" || 
-        req.body.url.substring(0-8) === "https://"
-    ) {
-        return next();
-    } else {
-        res.
-        status(400)
-        .json({ error: "You forgot to start your URL with http:// or https://" });
-    }
-};
 
 // validates if 'is_favorite' value is a boolean (true/false)
 const validateFavoriteSong = (req, res, next) => {
@@ -44,7 +31,6 @@ const validateArtistName = (req, res, next) => {
   
 
 module.exports = {
-  validateURL,
   validateFavoriteSong,
   validateSongName,
   validateArtistName,
