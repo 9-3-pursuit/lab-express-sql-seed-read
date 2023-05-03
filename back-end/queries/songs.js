@@ -14,7 +14,7 @@ const getAllSongs = async () => {
 const getSong = async (id) => {
   try {
     const song = await db.one("SELECT * FROM songs WHERE id = $1", [id]);
-    console.log(song)
+    
     return song;
   } catch (error) {
     return {error: "error"}; //object error : key value of error

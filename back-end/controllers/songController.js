@@ -10,7 +10,7 @@ const {
     createSong,
     updateSong,
     deleteSong,
-} =  require("../queries/songs.js");
+} =  require('../Queries/songs');
 
 
 // index

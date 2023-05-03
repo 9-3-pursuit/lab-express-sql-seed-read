@@ -2,7 +2,7 @@
 
 const express = require("express");
 const cors = require("cors");
-const songController = require("./controllers/songController");
+const songController = require("./Controllers/songController");
 
 //configuration
 const app = express();
