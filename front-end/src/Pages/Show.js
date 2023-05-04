@@ -1,4 +1,9 @@
+import SongDetails from "../Components/SongDetails";
 
 export default function Show() {
-  return;
+  return (
+    <div className="w-full">
+      <SongDetails />
+    </div>
+  )
 }
