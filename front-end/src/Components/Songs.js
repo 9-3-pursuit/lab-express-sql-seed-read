@@ -20,11 +20,11 @@ export default function Songs() {
     return (
       <div className="flex justify-center mt-20">
         <div className="grid grid-cols-[repeat(3,_minmax(200px,_2fr))_repeat(4,_1fr)] w-full">
-          <h2 className="border-y text-left font-semibold pl-2 h-14 flex items-center bg-neutral bg-opacity-30">Song</h2>
-          <h2 className="border-y text-left font-semibold pl-2 h-14 flex items-center bg-neutral bg-opacity-30">Artist</h2>
-          <h2 className="border-y text-left font-semibold pl-2 h-14 flex items-center bg-neutral bg-opacity-30">Album</h2>
-          <h2 className="border-y text-left font-semibold pl-2 h-14 flex items-center bg-neutral bg-opacity-30">Time</h2>
-          <h2 className="border-y font-semibold pl-8 h-14 flex items-center jus bg-neutral bg-opacity-30 col-span-3">
+          <h2 className="border-y border-gray text-left font-semibold pl-2 h-14 flex items-center bg-neutral bg-opacity-30">Song</h2>
+          <h2 className="border-y border-gray text-left font-semibold pl-2 h-14 flex items-center bg-neutral bg-opacity-30">Artist</h2>
+          <h2 className="border-y border-gray text-left font-semibold pl-2 h-14 flex items-center bg-neutral bg-opacity-30">Album</h2>
+          <h2 className="border-y border-gray text-left font-semibold pl-2 h-14 flex items-center bg-neutral bg-opacity-30">Time</h2>
+          <h2 className="border-y border-gray font-semibold pl-8 h-14 flex items-center jus bg-neutral bg-opacity-30 col-span-3">
             Action
           </h2>
 
