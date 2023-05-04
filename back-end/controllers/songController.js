@@ -2,11 +2,13 @@ const express = require("express");
 
 const songs = express.Router();
 
-const { getAllSongs } = require("../queries/songs");
-const { getSong } = require("../queries/songs");
-const { createSong } = require("../queries/songs");
-const { updateSong } = require("../queries/songs");
-const { deleteSong } = require("../queries/songs");
+const { getAllSongs, getSong,createSong, updatedSong, deleteSong } = 
+require("../queries/songs.js");
+// const { getAllSongs } = require("../queries/songs");
+// const { getSong } = require("../queries/songs");
+// const { createSong } = require("../queries/songs");
+// const { updateSong } = require("../queries/songs");
+// const { deleteSong } = require("../queries/songs");
 
 
 songs.get("/", async (req, res) => {
@@ -15,11 +17,11 @@ songs.get("/", async (req, res) => {
   if (allSongs[0]) {
     res.status(200).json(allSongs);
   } else {
-    res.status(500).json({ error: "No songs found" });
+    res.status(500).json({ error: "server error" });
   }
 });
 
-songs.get("/songs/:id", async (req, res) => {
+songs.get("/:id", async (req, res) => {
   const { id } = req.params;
   const oneSong = await getSong(id);
   if (!oneSong.error) {
@@ -33,11 +35,11 @@ songs.get("/songs/:id", async (req, res) => {
 
 songs.post("/", async (req, res) => {
   const { name, artist, album, time, is_favorite } = req.body;
-  const newSong = await createSong({ name, artidt, album, time, is_favorite });
+  const newSong = await createSong({ name, artist, album, time, is_favorite });
   // if (!name || !artist || !album || !time || !is_favorite) {
   //     res.status(422).json({error: "body must contain name, artist, is_favorite"});
   // }
-  if (!neewSong.error) {
+  if (!newSong.error) {
     res.status(201).json(newSong);
   } else {
     res.status(500).json({ error: "Song not created" });
