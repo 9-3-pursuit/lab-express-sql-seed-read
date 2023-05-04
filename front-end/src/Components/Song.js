@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import { MdModeEdit, MdOutlineDelete } from "react-icons/md";
+import { MdModeEdit, MdOutlineDelete, MdFavoriteBorder, MdFavorite } from "react-icons/md";
 import { AiOutlineEye } from "react-icons/ai";
 
 export default function Song({ song }) {
@@ -18,7 +18,8 @@ export default function Song({ song }) {
 
     return (
       <div className="grid grid-cols-[repeat(3,_minmax(200px,_2fr))_repeat(4,_1fr)] text-dark">
-        <div className="border-b border-gray flex items-center text-left font-semibold pl-2 h-14">
+        <div className="border-b border-gray flex items-center gap-2 text-left font-semibold pl-2 h-14">
+          {song.is_favorite ? <MdFavorite /> : <MdFavoriteBorder />}
           {song.name}
         </div>
         <div className="border-b border-gray flex items-center text-left pl-2 h-14">
