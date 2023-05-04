@@ -23,3 +23,8 @@ VALUES
         -- '4:00',
         -- true
     );
+
+INSERT INTO
+    artist (song_id)
+VALUES
+    ()
