@@ -1,4 +1,4 @@
-DROP DSATABASE IF EXISTS songs_dev;
+DROP DATABASE IF EXISTS songs_dev;
 
 CREATE DATABASE songs_dev;
 
