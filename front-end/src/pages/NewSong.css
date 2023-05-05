@@ -1,0 +1,33 @@
+.new{
+    color: whitesmoke;
+    margin-left: 40px
+}
+
+.text-box {
+    opacity: 0.45;
+    color: black;
+    width: 250px;
+    border-radius: 5px;
+    font-size: large;
+
+  }
+
+.text-box:hover {
+    background: black;
+    color: orange;
+  }
+
+  
+  
+  .check-box{
+    opacity: 0.45;
+    color: black;
+    transform: translateX(-4px);
+    
+  }
+
+  .check-box:hover{
+    background: black;
+    color: whitesmoke;
+  }
+  

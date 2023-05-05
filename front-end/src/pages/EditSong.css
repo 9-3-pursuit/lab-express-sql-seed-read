@@ -1,0 +1,40 @@
+.edit{
+    color: whitesmoke;
+    margin-left: 40px;
+}
+
+
+.nav-button4{
+    margin-right: 2px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    border-radius: 5px;
+    text-shadow: 2px 2px 4px #000000;
+    margin-bottom: 5px;
+    margin-top: 20px;
+}
+
+.nav-button4:hover {
+    background: black;
+    color: orange;
+  }
+
+  .text-box {
+    opacity: 0.45;
+    color: black;
+    width: 250px;
+    border-radius: 5px;
+    font-size: large;
+
+  }
+
+.text-box:hover {
+    background: black;
+    color: orange;
+  }
