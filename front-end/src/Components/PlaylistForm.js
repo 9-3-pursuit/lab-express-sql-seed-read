@@ -34,10 +34,10 @@ function PlaylistForm(props) {
       props.toggleView();
     }
     setNewPlaylist({
-        name: "",
-        description: "",
-        is_favorite: false,
-        song_id: id,
+      name: "",
+      description: "",
+      is_favorite: false,
+      song_id: id,
     });
   };
   return (
@@ -70,7 +70,6 @@ function PlaylistForm(props) {
           onChange={handleCheckboxChange}
           checked={newPlaylist.is_favorite}
         />
-      
 
         <br />
 
