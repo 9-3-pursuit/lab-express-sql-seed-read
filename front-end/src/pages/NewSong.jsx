@@ -43,16 +43,16 @@ const NewSong = () => {
          <br/> <br/>
           <form onSubmit={handleSubmit}>
             <label htmlFor="name">Song Name: </label>
-            <input type="text" className="text-box" id="name" name="name" value={newMusic.name} required onChange={handleTextChange} />
+            <input type="text" placeholder="Type Song Name Here" className="text-box" id="name" name="name" value={newMusic.name} required onChange={handleTextChange} />
               <br/> <br/>
             <label htmlFor="artist">Artist: </label>
-            <input type="text" className="text-box" id="artist" name="artist" value={newMusic.artist} required onChange={handleTextChange} />
+            <input type="text" placeholder="Type Artist Name Here" className="text-box" id="artist" name="artist" value={newMusic.artist} required onChange={handleTextChange} />
               <br/> <br/>
             <label htmlFor="album">Album: </label>
-            <input type="text" className="text-box" id="album" name="album" value={newMusic.album} required onChange={handleTextChange} />
+            <input type="text" placeholder="Type Album Name Here" className="text-box" id="album" name="album" value={newMusic.album} required onChange={handleTextChange} />
               <br/> <br/>
             <label htmlFor="time">Time: </label>
-            <input type="text" className="text-box" id="time" name="time" value={newMusic.time} required onChange={handleTextChange} />
+            <input type="text" placeholder="Type Song Duration Here" className="text-box" id="time" name="time" value={newMusic.time} required onChange={handleTextChange} />
               <br/> <br/>
             <label htmlFor="is_favorite">Is Favorite: </label>
             <input type="checkbox" className="check-box" id="is_favorite" name="is_favorite" checked={newMusic.is_favorite} onChange={handleCheckboxChange} />

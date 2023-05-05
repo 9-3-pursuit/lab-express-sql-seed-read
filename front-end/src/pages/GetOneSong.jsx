@@ -94,7 +94,7 @@ const GetOneSong = () => {
             </>
         }
         
-        <textarea className="text-area" name="review" id="review" value={oneSong.review === null ? '' : oneSong.review} onChange={handleTextChange} ></textarea>
+        <textarea className="text-area" placeholder="Write a review..." name="review" id="review" value={oneSong.review === null ? '' : oneSong.review} onChange={handleTextChange} ></textarea>
         <br/>
         <button className='nav-button2'>Submit Review</button>
             
