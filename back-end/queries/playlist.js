@@ -1,69 +1,66 @@
 const db = require("../db/dbConfig.js");
 
-const getAllArtist = async (song_id) => {
+const getAllPlaylist = async () => {
   try {
-    const allArtist = await db.any(
-      "SELECT * FROM songs WHERE song_id=$1",
-      song_id
-    );
-    return allArtist;
+    const allPlaylist = await db.any("SELECT * FROM playlist ");
+    return allPlaylist;
   } catch (error) {
     return { error: error };
   }
 };
 
-const getArtist = async (id) => {
+const getOnePlaylist = async (id) => {
   console.log(id);
   try {
-    const artist = await db.one("SELECT * FROM songs WHERE id=$1", id);
-    return artist;
+    const soloPlaylist = await db.one("SELECT * FROM playlist WHERE id=$1", id);
+    return soloPlaylist;
   } catch (error) {
     return { error: error };
   }
 };
 
-const createArtist = async (song) => {
+const createPlaylist = async (playlist) => {
   try {
-    const newArtist = await db.one(
-      "INSERT INTO songs(name, artist, album,time, is_favorite) VALUES ($1, $2, $3, $4, $5) RETURNING *",
-      [song.name, song.artist, song.album, song.time, song.is_favorite]
+    const newPlaylist = await db.one(
+      "INSERT INTO playlist(name, description, is_favorite) VALUES ($1, $2, $3) RETURNING *",
+      [playlist.name, playlist_description, playlist.is_favorite]
     );
-    return newArtist;
+    return newPlaylist;
   } catch (error) {
     return { error: error };
   }
 };
 
-const deleteArtist = async (id) => {
-  //songs/id
+const deletePlaylist = async (id) => {
+  //playlist/id
   try {
-    const deletedArtist = await db.one(
-      "DELETE FROM songs WHERE id=$1 RETURNING *",
+    const deletedPlaylist = await db.one(
+      "DELETE FROM playlist WHERE id=$1 RETURNING *",
       id
     );
-    return deletedArtist;
+    return deletedPlaylist;
   } catch (e) {
     return e;
   }
 };
 
-const updateArtist = async (id, song) => {
-  // songs/id
+const updatePlaylist = async (id, playlist) => {
+  // playlist/id
   try {
-    const updatedArtist = await db.one(
-      `UPDATE songs SET name=$1, artist=$2, album=$3, time=$4 is_favorite=$6 WHERE id=$6 RETURNING *`,
-      [song.name, song.artist, song.album, song.time, song.is_favorite, id]
+    const updatedPlaylist = await db.one(
+      `UPDATE playlist SET name=$1, description=$2,is_favorite=$3 WHERE id=$4 RETURNING *`,
+      [playlist.name, playlist.description, playlist.is_favorite, id]
     );
-    return updatedArtist;
+    return updatedPlaylist;
   } catch (e) {
     return e;
   }
 };
 
 module.exports = {
-  getAllArtist,
-  getArtist,
-  createArtist,
-  deleteArtist,
-  updateArtist,
+  getAllPlaylist,
+  getOnePlaylist,
+  createPlaylist,
+  deletePlaylist,
+  updatePlaylist
 };
