@@ -32,7 +32,7 @@ VALUES
     );
 
 INSERT INTO
-    playlist (name, description, is_favorite)
+    playlist (songs_id, name, description, is_favorite)
 VALUES
     (
        

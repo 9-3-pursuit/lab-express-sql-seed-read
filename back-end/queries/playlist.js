@@ -1,9 +1,11 @@
 const db = require("../db/dbConfig.js");
 
-const getAllPlaylist = async () => {
+const getAllPlaylist = async (playlistId) => {
   try {
-    const allPlaylist = await db.any("SELECT * FROM playlist ");
-    return allPlaylist;
+    const result = await db.any("SELECT * FROM playlist WHERE songs_id=$1", [
+      playlistId,
+    ]);
+    return { result };
   } catch (error) {
     return { error: error };
   }
@@ -21,39 +23,48 @@ const getOnePlaylist = async (id) => {
 
 const createPlaylist = async (playlist) => {
   try {
-    const newPlaylist = await db.one(
-      "INSERT INTO playlist(name, description, is_favorite) VALUES ($1, $2, $3) RETURNING *",
-      [playlist.name, playlist_description, playlist.is_favorite]
+    const result = await db.one(
+      `INSERT INTO
+        playlist(song_id, name, description, is_favorite)
+       VALUES
+        ($1, $2, $3, $4)
+       RETURNING *;`,
+      [
+        playlist.song_id,
+        playlist.name,
+        playlist.descriptiion,
+        playlist.is_favorite,
+      ]
     );
-    return newPlaylist;
+    return { result };
   } catch (error) {
-    return { error: error };
+    return { error };
   }
 };
 
 const deletePlaylist = async (id) => {
   //playlist/id
   try {
-    const deletedPlaylist = await db.one(
+    const result = await db.one(
       "DELETE FROM playlist WHERE id=$1 RETURNING *",
       id
     );
-    return deletedPlaylist;
-  } catch (e) {
-    return e;
+    return { result };
+  } catch (error) {
+    return { error };
   }
 };
 
 const updatePlaylist = async (id, playlist) => {
   // playlist/id
   try {
-    const updatedPlaylist = await db.one(
+    const result = await db.one(
       `UPDATE playlist SET name=$1, description=$2,is_favorite=$3 WHERE id=$4 RETURNING *`,
       [playlist.name, playlist.description, playlist.is_favorite, id]
     );
-    return updatedPlaylist;
-  } catch (e) {
-    return e;
+    return result;
+  } catch (error) {
+    return error;
   }
 };
 
@@ -62,5 +73,5 @@ module.exports = {
   getOnePlaylist,
   createPlaylist,
   deletePlaylist,
-  updatePlaylist
+  updatePlaylist,
 };

@@ -1,6 +1,5 @@
 // Dependecies
 const express = require("express");
-// const songs = require("./songsControllers")
 const playlist = express.Router({ mergeParams: true });
 
 const {
@@ -21,8 +20,8 @@ const {
 
 // GET ALL Playlist
 playlist.get("/", async (req, res) => {
-  const { id } = req.params;
-  const { error, result } = await getAllPlaylist(id);
+  const { playlistId } = req.params;
+  const { error, result } = await getAllPlaylist(playlistId);
   if (error) {
     res.status(200).json(result);
   } else {
@@ -33,9 +32,9 @@ playlist.get("/", async (req, res) => {
 // Part 2 --v
 
 // SHOW one playlist
-playlist.get("/:id", async (req, res) => {
-  const { id } = req.params;
-  const { error, result } = await getOnePlaylist(id);
+playlist.get("/:playlistId", async (req, res) => {
+  const { playlistId } = req.params;
+  const { error, result } = await getOnePlaylist(playlistId);
   if (error?.code) {
     res.status(404).json({ error: "Playlist not found" });
   } else if (error) {
@@ -66,13 +65,13 @@ playlist.post(
 // UPDATE PUT playlist
 
 playlist.put(
-  "/:id",
+  "/:playlistId",
   checkFaveBoolean,
   checkSongNameThere,
   checkArtistNameThere,
   async (req, res) => {
-    const { id } = req.params;
-    const { error, result } = await updatePlaylist(id, req.body);
+    const { playlistId } = req.params;
+    const { error, result } = await updatePlaylist(playlistId, req.body);
     if (error) {
       res.status(500).json({ error: "server error" });
     } else {
@@ -82,11 +81,11 @@ playlist.put(
 );
 
 // DELETE song
-playlist.delete(":/id", async (req, res) => {
+playlist.delete(":/playlistId", async (req, res) => {
   const { id } = req.params;
-  const { error, result } = await deletePlaylist(id);
+  const { error, result } = await deletePlaylist(playlistId);
   if (error) {
-    res.status(404).json("Review not found");
+    res.status(404).json("Playlist not found");
   } else {
     res.status(201).json(result);
   }
