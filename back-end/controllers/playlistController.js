@@ -1,28 +1,30 @@
 // Dependecies
 const express = require("express");
-const songs = express.Router({ mergeParams: true });
+// const songs = require("./songsControllers")
+const playlist = express.Router({ mergeParams: true });
 
 const {
-  getAllArtist,
-  getArtist,
-  createArtist,
-  deleteArtist,
-  updateArtist,
-} = require("../queries/artist.js");
+  getAllPlaylist,
+  getOnePlaylist,
+  createPlaylist,
+  deletePlaylist,
+  updatePlaylist,
+} = require("../queries/playlist.js");
 
-// const {
-//   checkFaveBoolean,
-//   checkSongNameThere,
-//   checkArtistNameThere,
-// } = require("../validations/validations.js");
+const {
+  checkFaveBoolean,
+  checkSongNameThere,
+  checkArtistNameThere,
+} = require("../validations/validations.js");
 
 // Part 1 --v
 
-// GET ALL SONGS
-artists.get("/", async (req, res) => {
-  const allArtists = await getAllArtist();
-  if (allArtists[0]) {
-    res.status(200).json(allArtists);
+// GET ALL Playlist
+playlist.get("/", async (req, res) => {
+  const { id } = req.params;
+  const { error, result } = await getAllPlaylist(id);
+  if (error) {
+    res.status(200).json(result);
   } else {
     res.status(500).json({ error: "server error" });
   }
@@ -30,50 +32,64 @@ artists.get("/", async (req, res) => {
 
 // Part 2 --v
 
-// SHOW one song
-artists.get("/:id", async (req, res) => {
+// SHOW one playlist
+playlist.get("/:id", async (req, res) => {
   const { id } = req.params;
-  const artist = await getArtist(id);
-  if (artist) {
-    res.status(200).json(artist);
+  const { error, result } = await getOnePlaylist(id);
+  if (error?.code) {
+    res.status(404).json({ error: "Playlist not found" });
+  } else if (error) {
+    res.status(500).json({ error: "server error" });
   } else {
-    res.status(404).json({ error: "not found" });
+    res.status(200).json(result);
   }
 });
 
-// CREATE POST song
-artist.post("/", async (req, res) => {
-  try {
-    const artist = await createArtist(req.body);
-    res.status(200).json(artist);
-  } catch (error) {
-    res.status(500).json({ error: error });
+// CREATE POST playlist
+playlist.post(
+  "/",
+  checkFaveBoolean,
+  checkSongNameThere,
+  checkArtistNameThere,
+  async (req, res) => {
+    const { error, result } = await createPlaylist(req.body);
+    if (error) {
+      res.status(500).json({ error: "server error" });
+    } else {
+      res.status(201).json(result);
+    }
   }
-});
+);
 
 // part 3 --v
 
-// UPDATE PUT song
-// ! works on Postman but according to npm test it does not
-artists.put("/:id", async (req, res) => {
-  try {
+// UPDATE PUT playlist
+
+playlist.put(
+  "/:id",
+  checkFaveBoolean,
+  checkSongNameThere,
+  checkArtistNameThere,
+  async (req, res) => {
     const { id } = req.params;
-    const updatedArtist = await updateArtist(id, req.body);
-    res.status(200).json(updatedArtist);
-  } catch (error) {
-    res.status(404).json({ error: "id not found" });
+    const { error, result } = await updatePlaylist(id, req.body);
+    if (error) {
+      res.status(500).json({ error: "server error" });
+    } else {
+      res.status(200).json(result);
+    }
   }
-});
+);
 
 // DELETE song
-artists.delete(":/id", async (req, res) => {
+playlist.delete(":/id", async (req, res) => {
   const { id } = req.params;
-  const goneArtist = await deleteArtist(id);
-  if (goneArtist.id) {
-    res.status(201).json(goneArtist);
+  const { error, result } = await deletePlaylist(id);
+  if (error) {
+    res.status(404).json("Review not found");
   } else {
-    res.status(404).json("Artist not found");
+    res.status(201).json(result);
   }
 });
 
-module.exports = artist;
+module.exports = playlist;
