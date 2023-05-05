@@ -1,5 +1,7 @@
 const express = require("express");
 const songs = express.Router();
+const validateSong = require("../validations/validateBookmark.js");
+const reviewsController = require("./reviewsController.js");
 const {
   getAllSongs,
   getOneSong,
@@ -7,6 +9,20 @@ const {
   deleteSong,
   updateSong,
 } = require("../queries/queries.js");
+
+// GET /songs/2/reviews
+
+songs.use("/:songId/reviews", reviewsController);
+
+// index
+songs.get("/", async (req, res) => {
+  const { error, result } = await getAllSongs();
+  if (error) {
+    res.status(500).json({ error: "server error" });
+  } else {
+    res.status(200).json(result);
+  }
+});
 
 // index page - all songs
 songs.get("/", async (req, res) => {
@@ -22,43 +38,45 @@ songs.get("/", async (req, res) => {
 // SHOW one song
 songs.get("/:id", async (req, res) => {
   const { id } = req.params;
-  const song = await getOneSong(id);
-  if (song) {
-    res.status(200).json(song);
+  const { error, result } = await getOneSong(id);
+  if (error?.code === 0) {
+    res.status(404).json({ error: "Song not found" });
+  } else if (error) {
+    res.status(500).json({ error: "server error" });
   } else {
-    res.status(404).json({ error: "not found" });
+    res.status(200).json(result);
   }
 });
 
 // CREATE
-songs.post("/", async (req, res) => {
-  try {
-    const song = await createSong(req.body);
-    res.status(200).json(song);
-  } catch (error) {
-    res.status(400).json({ error: error });
+songs.post("/", validateSong, async (req, res) => {
+  const { error, result } = await createSong(req.body);
+  if (error) {
+    res.status(500).json({ error: "server error" });
+  } else {
+    res.status(201).json(result);
   }
 });
 
 //update
-songs.put("/:id", async (req, res) => {
+songs.put("/:id", validateSong, async (req, res) => {
   const { id } = req.params;
-  const updatedSong = await updateSong(id, req.body);
-  if (updatedSong.id) {
-    res.status(200).json(updatedSong);
+  const { error, result } = await updateSong(id, req.body);
+  if (error) {
+    res.status(500).json({ error: "server error" });
   } else {
-    res.status(404).json("song not found");
+    res.status(200).json(result);
   }
 });
 
 // Delete
 songs.delete("/:id", async (req, res) => {
   const { id } = req.params;
-  const deletedSong = await deleteSong(id);
-  if (deletedSong.id) {
-    res.status(200).json(deletedSong);
+  const { error, result } = await deleteSong(id);
+  if (error) {
+    res.status(404).json("Song not found");
   } else {
-    res.status(404).json("song not found");
+    res.status(201).json(result);
   }
 });
 

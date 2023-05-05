@@ -1,6 +1,6 @@
 const express = require("express");
 const reviews = express.Router({ mergeParams: true });
-const validateReview = require("../validations/");
+const validateReview = require("../validations/validateReview.js");
 const {
   getAllReviewsBySong,
   getReview,
