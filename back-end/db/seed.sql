@@ -1,6 +1,13 @@
 \ c songs_dev
 INSERT INTO
-    songs (name, artist, album, time, is_favorite)
+    songs (
+        playlist_id,
+        name,
+        artist,
+        album,
+        time,
+        is_favorite
+    )
 VALUES
     (
         -- 'Nothing Like Loving You',
@@ -25,6 +32,8 @@ VALUES
     );
 
 INSERT INTO
-    artist (song_id)
+    playlist (name, description, is_favorite)
 VALUES
-    ()
+    (
+       
+    )

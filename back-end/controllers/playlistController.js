@@ -10,11 +10,11 @@ const {
   updateArtist,
 } = require("../queries/artist.js");
 
-const {
-  checkFaveBoolean,
-  checkSongNameThere,
-  checkArtistNameThere,
-} = require("../validations/validations.js");
+// const {
+//   checkFaveBoolean,
+//   checkSongNameThere,
+//   checkArtistNameThere,
+// } = require("../validations/validations.js");
 
 // Part 1 --v
 

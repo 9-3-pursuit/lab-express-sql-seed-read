@@ -10,18 +10,13 @@ CREATE TABLE songs (
     artist TEXT NOT NULL,
     album TEXT,
     time TEXT,
-    is_favorite BOOLEAN
+    is_favorite BOOLEAN,
+    playlist_id INTERGER REFERENCES playlist (id) ON DELETE CASACADE
 );
 
-DROP DATABASE IF EXISTS artist_dev;
-
-CREATE DATABASE artists_dev;
-
-CREATE TABLE artists (
+CREATE TABLE playlist (
     id SERIAL PRIMARY KEY,
     name TEXT NOT NULL,
-    artist TEXT NOT NULL,
-    album TEXT,
-    time TEXT,
+    description TEXT,
     is_favorite BOOLEAN
 );
