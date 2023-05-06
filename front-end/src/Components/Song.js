@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 export default function Song({ song }) {
   return (
-    <tr className="song">
+    <tr className="Song">
       <td>
         <Link to={`/songs/${song.id}`}>{song.name}</Link>
       </td>

@@ -24,10 +24,10 @@ export default function Songs() {
         <Table striped bordered hover>
           <thead>
             <tr>
-              <th>Title</th>
-              <th>Artist</th>
-              <th></th>
-              <th>Time</th>
+              <td>Title</td>
+              <td>Artist</td>
+              <td>is_favorite</td>
+              <td>Time</td>
             </tr>
           </thead>
           <tbody>
