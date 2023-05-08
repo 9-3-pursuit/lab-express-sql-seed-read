@@ -6,20 +6,27 @@
   "scripts": {
     "db:init": "psql -U postgres -f db/schema.sql",
     "db:seed": "psql -U postgres -f db/seed.sql",
-    "test": "jest --runInBand"
+    "test": "jest --runInBand",
+    "start": "nodemon server.js",
+    "dev": "nodemon server.js"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/joinpursuit/tuner-full-stack-app.git"
   },
-  "author": "K. Rafalski",
+  "author": "Vandhana Mohan",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/joinpursuit/tuner-full-stack-app/issues"
   },
   "homepage": "https://github.com/joinpursuit/tuner-full-stack-app#readme",
   "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2",
     "jest": "^27.4.7",
+    "joi": "^17.9.2",
+    "pg-promise": "^11.4.3",
     "supertest": "^6.2.0"
   }
 }
