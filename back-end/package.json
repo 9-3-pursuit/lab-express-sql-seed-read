@@ -1,6 +1,6 @@
 
 {
-  "name": "tuner-mono-repo",
+  "name": "tuner",
   "version": "1.0.0",
   "description": "Starter code for student lab",
   "main": "server.js",

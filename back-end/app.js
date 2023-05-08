@@ -2,7 +2,9 @@
 
 const express = require("express");
 const cors = require("cors");
-const songController = require("./Controllers/songController");
+
+const albumController = require("./Controllers/albumController");
+//const songController = require("./Controllers/songController");
 
 //configuration
 const app = express();
@@ -16,11 +18,15 @@ app.get("/", (req, res) => {
   res.send("Welcome to Tuner");
 });
 
+//localhost://3345/albums
+app.use("/albums", albumController);
 
-app.use("/songs", songController);
+//app.use("/songs", songController);
+
+
 
 app.get("*", (req, res) => {
-  res.status(404).send("Page not found");
+  res.status(404).send("Page not Found");
 });
 
 module.exports = app;
