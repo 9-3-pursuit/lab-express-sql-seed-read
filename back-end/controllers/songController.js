@@ -14,16 +14,6 @@ const {
 
 songs.use("/:songId/reviews", reviewsController);
 
-// index
-songs.get("/", async (req, res) => {
-  const { error, result } = await getAllSongs();
-  if (error) {
-    res.status(500).json({ error: "server error" });
-  } else {
-    res.status(200).json(result);
-  }
-});
-
 // index page - all songs
 songs.get("/", async (req, res) => {
   //http://localhost:3003/songs
@@ -55,6 +45,7 @@ songs.post("/", validateSong, async (req, res) => {
     res.status(500).json({ error: "server error" });
   } else {
     res.status(201).json(result);
+    console.log(result);
   }
 });
 
