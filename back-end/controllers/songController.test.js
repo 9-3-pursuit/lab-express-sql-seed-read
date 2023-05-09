@@ -123,7 +123,7 @@ describe("Songs", () => {
           const response = await request(songs).post("/songs").send({
             name: "Star Roving",
             artist: "Slowdive",
-            is_favorite: "false",
+            is_favorite: false,
             time: "5:37",
           });
 

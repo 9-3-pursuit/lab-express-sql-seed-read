@@ -6,7 +6,7 @@ const validateNAF = (req, res, next) => {
     } else {
       res
         .status(400)
-        .json({ error: "You forgot name, artist or is_favotite" });
+        .json({ error: "You forgot name, artist or is_favorite" });
     }
   };
   
