@@ -1,100 +1,82 @@
-import axios from "axios";
-import { useState } from "react";
-import { useNavigate, Link } from "react-router-dom";
+import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 
-const API = process.env.REACT_APP_API_URL;
-
-function SongNewForm() {
-  let navigate = useNavigate();
-  let { id } = useParams();
-
-  const addSong = (newSong) => {
-    axios
-      .post(`${API}/songs`, newSong)
-      .then(
-        () => {
-          navigate(`/songs`);
-        },
-        (error) => console.error(error)
-      )
-      .catch((c) => console.warn("catch", c));
-  };
+function SongNewForm(props) {
+  let { albumId } = useParams();
+  const { songDetails } = props;
 
   const [song, setSong] = useState({
     name: "",
     artist: "",
-    album: "",
     time: "",
     is_favorite: false,
+    album_id: albumId,
   });
 
   const handleTextChange = (event) => {
     setSong({ ...song, [event.target.id]: event.target.value });
   };
 
-  const handleCheckboxChange = () => {
-    setSong({ ...song, is_favorite: !song.is_favorite });
-  };
+  useEffect(() => {
+    if (songDetails) {
+      setSong(songDetails);
+    }
+  }, [albumId, songDetails, props]);
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    addSong(song);
+    props.handleSubmit(song, albumId);
+    if (songDetails) {
+        console.log("song id:", songDetails.song_id)
+      props.toggleView();
+    }
+    setSong({
+      name: "",
+    artist: "",
+    time: "",
+    is_favorite: false,
+    album_id: albumId,
+    });
   };
-
   return (
-    <div className="New">
+    <div className="Edit">
+      {/* renders the children elements of this component   */}
+      {/* <ReviewForm> some child element </ReviewFrom> */}
+      {props.children}
       <form onSubmit={handleSubmit}>
-        <label htmlFor="name">Song Name:</label>
+        <label htmlFor="Name">Name:</label>
         <input
           id="name"
           value={song.name}
           type="text"
+          name="name"
           onChange={handleTextChange}
-          placeholder="Name of artist"
+          placeholder="Song Name"
           required
         />
         <label htmlFor="artist">Artist:</label>
         <input
           id="artist"
-          value={song.artist}
           type="text"
-          onChange={handleTextChange}
-          placeholder="Name of artist"
+          name="artist"
           required
+          value={song.artist}
+          onChange={handleTextChange}
         />
         <label htmlFor="time">Time:</label>
         <input
           id="time"
           type="text"
-          name="title"
-          value={song.time}
-          placeholder="title of song"
+          name="time"
+          values={song.time}
           onChange={handleTextChange}
         />
-        <label htmlFor="album">Album:</label>
-        <input
-          id="album"
-          value={song.album}
-          type="text"
-          onChange={handleTextChange}
-          placeholder="album "
-          required
-        />
-
-        <label htmlFor="is_favorite">Favorite:</label>
-        <input
-          id="is_favorite"
-          type="checkbox"
-          onChange={handleCheckboxChange}
-          checked={song.is_favorite}
-        />
+       
 
         <br />
 
-        <button type="submit">Add Song</button>
+        <input type="submit" />
       </form>
-      <button onClick={() => navigate("/songs")}>Cancel</button>
     </div>
   );
 }

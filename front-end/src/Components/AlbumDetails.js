@@ -1,36 +1,36 @@
-
 import React from "react";
 import { useState, useEffect } from "react";
 import { useParams, Link, useNavigate } from "react-router-dom";
 import axios from "axios";
+import Songs from "./Albums";
 
 const API = process.env.REACT_APP_API_URL
  
-function SongDetails() {
-  const [song, setSong] = useState([]);
-  const { id } = useParams();
+function AlbumDetails() {
+  const [album, setAlbum] = useState({});
+  const { albumId } = useParams();
   const navigate = useNavigate();
 
   useEffect(() => {
-    axios.get(`${API}/songs/${id}`)
+    axios.get(`${API}/albums/${albumId}`)
     .then((response) => {
-      console.log(response.data)
-      setSong(response.data)
+     
+      setAlbum(response.data)
     }).catch((e) => {
       console.warn("catch:", e)
     })
-  }, [id]);
+  }, [albumId]);
 
   const handleDelete = () => {
    
-    deleteSong();
+    deleteAlbum();
   };
 
-  const deleteSong = () => {
+  const deleteAlbum = () => {
     axios
-      .delete(`${API}/songs/${id}`)
+      .delete(`${API}/albums/${albumId}`)
       .then(() => {
-        navigate(`/songs`);
+        navigate(`/albums`);
       })
       .catch((e) => {
         console.warn("catch:", e);
@@ -39,22 +39,22 @@ function SongDetails() {
 
 return (
   <article>
-    <h1>{song.is_favorite ? <span>⭐️</span> : null} {song.name} - By {song.artist}</h1>
+    <h1>Abum: {album.name} - By {album.artist}</h1>
     <h2>
       <span>
-        Album:
+        Genre:
       </span>
-      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {song.album}
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {album.genre}
     </h2>
-    <h3>Time: {song.time}</h3>
+    <h3>Producer: {album.producer}</h3>
     <div className="showNavigation">
       <div>
-        <Link to={`/songs`}>
+        <Link to={`/albums`}>
           <button>Back</button>
         </Link>
       </div>
       <div>
-        <Link to={`/songs/id/edit`}>
+        <Link to={`/albums/${album.album_id}/edit`}>
           <button>Edit</button>
         </Link>
       </div>
@@ -62,9 +62,10 @@ return (
         <button onClick={handleDelete}>Delete</button>
       </div>
     </div>
-
+    <h3>Songs</h3>
+  <Songs />
   </article>
  ) 
 }
 
-export default SongDetails;
+export default AlbumDetails;

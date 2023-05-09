@@ -1,22 +1,30 @@
-import { Link, useParams } from "react-router-dom";
+//mport SongEditForm from "./SongEditForm";
+//import { useState } from "react";
 
-export default function Song({ song }) {
-  let { id } = useParams();
+function Song({ song, handleDelete, handleSubmit }) {
+  // const [viewEditForm, toggleEditForm] = useState(false);
 
+  // const toggleView = () => {
+  //   toggleEditForm(!viewEditForm);
+  // };
   return (
-    <tr>
-      <td>
-        {song.is_favorite ? <span>🌟</span> : <span>&nbsp; &nbsp; &nbsp;</span>}
-      </td>
-      <td>
-        <Link to={`/songs/${song.id}`}>{song.name}</Link>
-      </td>
-      <td>artist {song.artist}</td>
-      <td>{song.time}</td>
-      <td>{song.album}</td>
-      <td>
-        <Link to={`/songs/${song.id}`}>🔏</Link>
-      </td>
-    </tr>
+    <div className="Song">
+      {/* <button onClick={toggleView}>Edit this Song</button>
+      {viewEditForm ? (
+        <SongEditForm songDetails={song} handleSubmit={handleSubmit} toggleView={toggleView} />
+      ) : (
+        <div>
+          <h4>
+            {song.name} <span>{song.artist}</span>
+          </h4>
+          <h5>{song.time}</h5>
+        
+        </div>
+      )}
+      <button onClick={() => handleDelete(review.id)}>Delete</button> */}
+     <h4>Song Name: {song.name} </h4>
+    </div>
   );
 }
+
+export default Song;
