@@ -1,7 +1,8 @@
 // DEPENDENCIES
 const express = require('express');
 const cors = require('cors');
-const songsController = require('./controllers/songController')
+ //const songsController = require('./controllers/songController')
+const albumController = require('./controllers/albumController')
 
 //configuration
 const app  = express();
@@ -15,8 +16,10 @@ app.get('/',(req,res)=>{
   res.send('Welcome to Tuner')
 })
 
-app.use('/songs', songsController)
+// app.use('/songs', songsController)
 
+//local host:3000/songs
+app.use('/albums', albumController)
 //404 page 
 app.get  ('*',(req,res)=>{
   // console.log('404!')

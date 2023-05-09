@@ -1,52 +1,61 @@
-const express = require("express");
-const songs = express.Router();
+const express = require('express');
+const songs = express.Router({ mergeParams: true});
+//const {validateNAF} = require('../Validations/validation')
+
 const {
-  getAllSongs,
-  getSong,
-  createSong,
-  deleteSong,
-  updateSong,
-} = require("../queries/songs.js");
-const {validateURL} = require("../validations/validateURL.js")
+    getAllSongsByAlbum,
+    getSongByAlbum,
+    createSong,
+    updateSong,
+    deleteSong,
+} =  require('../queries/songs');
+
 
 // index
+// localhost:3345/albums/:album_id/songs
 songs.get("/", async (req, res) => {
-  const allSongs = await getAllSongs();
+  const {albumId} = req.params;
+  const allSongs = await getAllSongsByAlbum(albumId);
   if (!allSongs.error) {
     res.status(200).json(allSongs);
   } else {
     res.status(500).json({ error: "server error" });
-  }
+  } 
 });
 
-// show
-songs.get("/:id", async(req, res) => {
-    const { id } = req.params;
-      const song = await getSong(id);
-      if (song.error != "error") {
-          res.status(200).json(song);
-      } else {
-          res.status(404).json({ error: "server error" });
-      }
-  });
-
-// create
-songs.post("/", validateURL, async (req, res) => {
-    const newSong = await createSong(req.body);
-    if (!newSong.error) {
-        res.status(200).json(newSong);
+//show
+// localhost:3345/albums/:album_id/songs/:song_id 
+songs.get("/:songId", async(req, res) => {
+  const { albumId,songId } = req.params;
+    const song = await getSongByAlbum(albumId,songId);
+    if (song.error != "error") {
+        res.status(200).json(song);
     } else {
         res.status(404).json({ error: "server error" });
     }
-    
-}); 
+});
 
   
-// update song
-songs.put("/:id", validateURL,
+//create 
+//localhost:3345/albums/:albumId/songs
+          songs.post("/", async (req, res) => {
+            const { albumId } = req.params;
+            const newSong = await createSong(req.body,albumId);
+            if (!newSong.error) {
+                res.status(200).json(newSong);
+            } else {
+                res.status(404).json({ error: "server error" });
+            }
+            
+        }); 
+
+
+//update
+//PUT localhost:3345/albums/:albumId/songs/:songId
+ songs.put("/:songId",
     async (req, res) => { 
-        const { id } = req.params;
-    const updatedSong = await updateSong(id, req.body);
+        const { albumId, songId } = req.params;
+    const updatedSong = await updateSong(albumId,songId, req.body);
     if (!updatedSong.error) {
         res.status(200).json(updatedSong);
     } else {
@@ -54,18 +63,16 @@ songs.put("/:id", validateURL,
     }
 });
 
-songs.delete("/:id", async (req, res) => {
-  const { id } = req.params;
-  const deletedSong = await deleteSong(id);
-  console.log(deletedSong);
-  if (deletedSong.id) {
-    res.status(201).json(deletedSong);
-  } else {
-    res.status(404).json("Song not found");
-  }
-});
 
 
+songs.delete("/:songId", async (req, res) => {
+    const { songId } = req.params;
+    const deletedSong = await deleteSong(songId);
+    if (!deletedSong.error) {
+        res.status(200).json(deletedSong);
+    } else {
+        res.status(404).json({ error: "server error !!!!!!!!!" });
+    }
+}); 
 
 module.exports = songs;
-
