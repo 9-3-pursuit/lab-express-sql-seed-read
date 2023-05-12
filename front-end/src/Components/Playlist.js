@@ -1,6 +1,6 @@
 import PlaylistForm from "./PlylistForm";
 import { useState } from "react";
-console.log("hey")
+
 function Playlist({ playlist, handleDelete, handleSubmit }) {
   
   const [playlistEditForm, togglePlaylistEditForm] = useState(false);
